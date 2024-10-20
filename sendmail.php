@@ -36,12 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //Server settings
         $mail->SMTPDebug = 0;  // Disable verbose debug output
         $mail->isSMTP();  // Set mailer to use SMTP
-        $mail->Host       = 'smtp.gmail.com';  // Specify Gmail's SMTP server
+        $mail->Host       = 'mail.americareside.com';  // Specify Gmail's SMTP server
         $mail->SMTPAuth   = true;  // Enable SMTP authentication
-        $mail->Username   = 'ajani_habeeb88@yahoo.com';   // Your Gmail address
-        $mail->Password   = 'tcqvhvyskefrvunp';  // Your Gmail password or app-specific password
+        $mail->Username   = 'agent@americareside.com';   // Your Gmail address
+        $mail->Password   = 'MM8L6jsjdqJ~';  // Your Gmail password or app-specific password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
-        $mail->Port       = 587;  // TCP port to connect to Gmail's SMTP
+        $mail->Port       = 465;  // TCP port to connect to Gmail's SMTP
 
         //Recipients
         $mail->setFrom('ajani_habeeb88@yahoo.com', 'Habeeb');  // From email address and name

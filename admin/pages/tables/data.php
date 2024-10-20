@@ -506,13 +506,13 @@ input[type=file]::file-selector-button:hover {
                   </div>
                   
                 </div>
-                <div class="col-12">
+                
                   <div class="main-container">
                     <div id="editor">
                       <p>Hello from CKEditor 5!</p>
                     </div>
                   </div>
-                </div>
+                
                 <div class="col-12 tab-loading">
                     <button class="btn btn-primary w-100" id="submit_event" onclick="post(this.id)">
                       <i class="fas fa-upload"></i>
