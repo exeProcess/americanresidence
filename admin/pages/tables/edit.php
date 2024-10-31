@@ -4,6 +4,11 @@
   $dbh = new Database;
   $db = $dbh->connect();
   $ctrl = new Controller($db);
+  if(isset($_GET["id"])){
+    $id = $_GET['id'];
+    $table = "properties";
+    $data = $ctrl->select_this($id, $table);
+  }
   // if(!$ctrl::is_logged_in()){
   //   $ctrl::login_error_redirect("../form/login.php");
   // }
@@ -11,12 +16,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Web Admin | DataTables</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.2.0/ckeditor5.css">
@@ -31,7 +34,7 @@
   <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- Bootstrap Color Picker -->
   <link rel="stylesheet" href="../../plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
-
+  <!-- <link rel="stylesheet" type="text/css" href="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.css"> -->
   <!-- Tempusdominus Bootstrap 4 -->
   <link rel="stylesheet" href="../../plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
   <!-- Bootstrap4 Duallistbox -->
@@ -45,44 +48,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
   <style>
-    .inputflyer {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-  }
-  .main-container {
-				width: 795px;
-				margin-left: auto;
-				margin-right: auto;
-			}
-  .inputflyer + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
-}
-.preview {
-            display: inline-block;
-            margin: 10px;
-        }
-        .preview img {
-            width: 100px;
-            height: 100px;
-            margin-right: 10px;
-        }
-
-.inputflyer + label,
-.inputflyer + label:hover {
-    background-color: red;
-}
-.inputflyer + label {
-	cursor: pointer; /* "hand" cursor */
-}
-input[type=file] {
+    input[type=file] {
   /* width: 350px; */
   width: 100%;
   color: #444;
@@ -128,7 +94,6 @@ input[type=file]::file-selector-button:hover {
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
     </ul>
-
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       <!-- Navbar Search -->
@@ -299,7 +264,7 @@ input[type=file]::file-selector-button:hover {
               </li> -->
               <li class="nav-item">
                 <a href="./clone.php" class="nav-link active">
-                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <i class="nav-icon fas fa-th"></i>
                   <p>
                     Manage Products
                   </p>
@@ -307,22 +272,13 @@ input[type=file]::file-selector-button:hover {
               </li>
               <li class="nav-item">
                 <a href="./data.php" class="nav-link">
-                  <i class="nav-icon fas fa-th"></i>
+                  <i class="nav-icon fas fa-copy"></i>
                   <p>
                     Property List
                     
                   </p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="./pages/tables/edit.php" class="nav-link">
-                  <i class="nav-icon fas fa-copy"></i>
-                  <p>
-                    Edit Property
-                    
-                  </p>
-                </a>
-              </li> -->
               <!-- <li class="nav-item">
                 <a href="./pages/tables/donation.php" class="nav-link">
                   <i class="nav-icon fas fa-copy"></i>
@@ -402,67 +358,188 @@ input[type=file]::file-selector-button:hover {
     <section class="content">
       <div class="container-fluid">
         <div class="row">
-          <?php
-             $dbClass = new Database();
-             $db = $dbClass->connect();
-             $ctrl = new Controller($db);
-             $properties = $ctrl->selectAll("properties");
-          ?>
           <div class="col-12">
-            <div class="card">
+            <div class="card card-default">
               <div class="card-header">
-                <h3 class="card-title">List Of Properties</h3>
+                <h3 class="card-title">Add Property</h3>
+                <input type="hidden" name="edit-id" id="edit_id-">
+                <!-- <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  
+                </div> -->
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                  <thead>
-                      <tr>
-                        <th>property name</th>
-                        <th>property Location</th>
-                        <th>Transaction Type</th>
-                        <th>Space</th>
-                        <th>Property Type</th>
-                        <th>Action</th>
-                      </tr>  
-                  </thead>
-                  <tbody id="table-body">
-                     <?php 
-
-                        foreach($properties as $property):
-                      ?>
-                      <tr id="row-<?= $property['id']?>">
-                        <td><?= $property['name']?></td>
-                        <td><?= $property['prop_location']?></td>
-                        <td><?= $property['transaction_type']?></td>
-                        <td><?= $property['space']?></td>
-                        <td><?= $property['prop_type']?></td>
-                        
-                        <td class="d-flex justify-content-between">
-                          <a href="./edit.php?id=<?= $property['id']?>" class="text-success"><i class="fa fa-solid fa-pen"></i></a>
-                          <a href="#" class="text-danger" id="<?= $property['id']?>" onclick="fnDelete(this.id)"><i class="fa fa-solid fa-trash"></i></i></a>
-                        </td>
-                      </tr>
+              <div class="card-body" >
+                <div class="row">
+                  <div class="col-md-6">
+                    
+                    <div class="form-group">
+                      <label>Property Name</label>
+    
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="prop-name" value="<?= $data['name']?>">
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                    <!-- /.form-group -->
+                    
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Location</label>
+                      <input type="email" class="form-control" id="prop-location" value="<?= $data['prop_location']?>" placeholder="Enter property address">
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-6">
+                    
+                    <div class="form-group">
+                      <label>Property Type</label>
                       <?php
-                        endforeach;
+                        $property_type = $ctrl->selectAll("property_type");
                       ?>
-                      <!--<tr>
-                        <td>Public Lecture</td>
-                        <td>Fashola street,Ijoke sango. Ogun state.Al Hidayyah Mosque</td>
-                        <td>3pm - 4pm</td>
-                        <td> 14 - 1 - 2024</td>
-                        <td>arkan</td>
-                        <td>
-                          <a href="">edit</a>
-                        </td>
-                      </tr>
-                   -->
-                  </tfoot>
-                </table>
+                      <select class="custom-select" id="prop-type"">
+                        <?php 
+                          foreach ($property_type as $type):
+                        ?>
+                            <option value="<?=$type['prop_type']?>" <?= (($type['prop_type'] == $data['prop_type'])?'selected': '') ?>><?=$type['prop_type']?></option>
+                        <?php
+                          endforeach;
+                        ?>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Transaction Type</label>
+                        <select class="custom-select" id="transaction-type" >
+                          <option value="rent" <?= (($data['prop_type']) == 'rent'?"selected": "") ?>>Rent</option>
+                          <option value="lease" <?= (($data['prop_type']) == 'lease'?"selected": "") ?>>Lease</option>
+                          <option value="sell" <?= (($data['prop_type']) == 'sell'?"selected": "") ?>>Sell</option>
+                        </select>
+                      </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    
+                    <div class="form-group">
+                      <label>Interior space</label>
+    
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                        </div>
+                        <input type="text" class="form-control" value="<?= $data['space']?>" id="space">
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                    <!-- /.form-group -->
+                    <!-- /.form-group -->
+                  </div>
+                  <!-- /.col -->
+                   <div class="col-md-6">
+                    
+                    <div class="form-group">
+                      <label>Number of Bedrooms</label>
+    
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                        </div>
+                        <input type="text" class="form-control" value="<?= $data['bedroom']?>" id="bedroom">
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    
+                    <div class="form-group">
+                      <label>Number of bathrooms</label>
+    
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                        </div>
+                        <input type="text" class="form-control" value="<?= $data['bathroom']?>" id="bathroom">
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    
+                    <div class="form-group">
+                      <label>Asking Price</label>
+    
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="asking">
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    
+                    <div class="form-group">
+                      <label>Final Price</label>
+    
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-laptop"></i></span>
+                        </div>
+                        <input type="text" class="form-control" id="final">
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                    <!-- /.form-group -->
+                  </div>
+                  <div class="col-md-6">
+                    
+                    <!-- <div class="form-group">
+                      <input type="file" id="file-input" multiple>
+                      <div id="preview-container"></div>
+                    </div> -->
+                    <div class="form-group">
+                      <label>Add Property Images</label>
+    
+                      <div class="input-group">
+                        <input type="file" accept="image/*" multiple id="images">
+                      </div>
+                      <!-- /.input group -->
+                    </div>
+                  </div>
+                  
+                </div>
+                
+                <div class="form-floating">
+                  <label for="floatingTextarea">Property Description</label>
+                  <textarea class="form-control" placeholder="Property Description" id="description">
+                    <?= $data['description']?>
+                  </textarea>
+                </div>
+                <br>
+                <div class="col-12 tab-loading">
+                  <input type="hidden" name="" value="<?=$id?>" id="dataId">
+                    <button class="btn btn-primary w-100" id="update">
+                      <i class="fas fa-upload"></i>
+                      <span>Update</span>
+                    </button>
+                    <!-- <button class="btn btn-primary w-100 d-none" id="update_event">
+                      <i class="fas fa-upload"></i>
+                      <span>Update Event</span>
+                    </button> -->
+                  </div>
+                <!-- /.row -->
               </div>
               <!-- /.card-body -->
+              
             </div>
-            <!-- /.card -->
           </div>
           <!-- /.col -->
         </div>
@@ -476,9 +553,6 @@ input[type=file]::file-selector-button:hover {
  
 
 </div>
-<!-- ./wrapper -->
-
-<!-- jQuery -->
 <script src="../../plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 <script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -506,192 +580,107 @@ input[type=file]::file-selector-button:hover {
 <script src="../../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-
+<!-- <script src="https://common.olemiss.edu/_js/sweet-alert/sweet-alert.min.js"></script> -->
 <script src="../../plugins/jszip/jszip.min.js"></script>
 <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
 <script src="../../plugins/pdfmake/vfs_fonts.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="../../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
-
 <script>
-  $("#submit_event").click(() => {
+    $("#update").click(() => {
+      // console.log(elementId);
+      
+    // $("#submit_event").html('<i class="fa fa-sync fa-spin">')
+    let file = document.querySelector("#images").files[0]
+    let data = {
+      name: $("#prop-name").val(),
+      location: $("#prop-location").val(),
+      type: $("#prop-type").val(),
+      transactionType: $("#transcation-type").val(),
+      space: $("#space").val(),
+      bedroom: $("#bedroom").val(),
+      bathroom: $("#bathroom").val(),
+      description: $("#description").val(),
+      id: $("#dataId").val(),
+      edit_product: true
+    }
     
-    alert('working')
-  
-  })
-  let fnEdit = (id) => {
-    $("#update_event").html('<i class="fa fa-sync fa-spin">')
-    let dataId = id.split("-")[1]
-    let data = {
-      id: dataId,
-      getEdit: true,
-      table: "properties"
-    }
-
-    $.ajax({
-      url: `./edit.php?id=${dataID}`,
-      method: 'GET',
-    })
-  }
-
-
-  let fnDelete = (id) =>{
-    let data = {
-      id: id,
-      delete: true,
-      table: "products"
-    }
+    let formdata = new FormData();
+    formdata.append('name',data.name)
+    formdata.append('prop_location', data.location);
+    formdata.append('prop_type', data.type);
+    formdata.append('transactionType', data.transactionType);
+    formdata.append('space', data.space);
+    formdata.append('bedroom', data.bedroom);
+    formdata.append('bathroom', data.bathroom);
+    formdata.append('asking', $("#asking").val());
+    formdata.append('final', $("#final").val());
+    formdata.append('description', data.description);
+    formdata.append('id', data.id);
+    
+    formdata.append('edit_product', data.edit_product)
     $.ajax({
       url: '../../../Controller/requestHandler.php',
       method: 'POST',
-      data: data,
+      data: formdata,
+      cache : false,
+      contentType : false,
+      processData : false,
       success: (res) => {
-       // if(res == "success"){
-          let row = $(`#row-${id}`);
-          row.remove();
+        let result = JSON.parse(res)
+        console.log(result);
+        
+        if(result.status == 200){
+          swal({
+            title: `${result.text}`,
+            text: 'Property Edited successfully',
+            type: "success",
+            confirmButtonText: "Ok",
+            
+          });
+        }else{
+          swal({
+            title: `${result.text}`,
+            text: `${result.message}`,
+            type: "error",
+            confirmButtonText: "Ok",
+            
+          });
+        }
+        
+        // if(result.status == 200){
+        //   res
+        //   let table = $("#table-body");
+        //   let date = data.date.split(" ")[0]
+        //   let time = data.date.split(" ")[1]
+
+        //   table.prepend(`
+        //   <tr>
+        //                   <td>${data.title}</td>
+        //                   <td>${data.location}</td>
+        //                   <td>${time}</td>
+        //                   <td>${date}</td>
+        //                   <td>${data.topic}</td>
+        //                   <td class="d-flex justify-content-between">
+        //                     <a href="#" class="text-success"  onclick="edit(this.id)"><i class="fa fa-solid fa-pen"></i></a>
+        //                     <a href="#" class="text-danger"  onclick="get(this.id)"><i class="fa fa-solid fa-trash"></i></i></a>
+        //                   </td>
+        //                 </tr>
+        //   `)
+        //   toastr.success('Event Uploaded Successfully')
+        //   $("#submit_event").html(`<i class="fas fa-upload"></i>
+        //               <span>Upload Event</span>`)
+          
+        // }else{
+        //   console.log(res);
+        // }
+        
         
       }
     })
-  }
-
-
-  // $("#loadImg").click(() => {
-  //   var flyer = $("#flyer").get("src")
-  //   console.log(flyer);
-  // })
-
-
-  //$("#submit_event").click(() => {
-    
-    // let data = {
-    //   name: $("#prop-name").val(),
-    //   location: $("#prop-location").val(),
-    //   type: $("#prop-type").val(),
-    //   transactionType: $("#transcation-type").val(),
-    //   space: $("#space").val(),
-    //   bedroom: $("#bedroom").val(),
-    //   bathroom: $("#bathroom").val(),
-    //   description: $("#description").val()
-    // }
-    // console.log(data);
-    
-    // $("#submit_event").html('<i class="fa fa-sync fa-spin">')
-    // let data = {
-    //   name: $("#prop-name").val(),
-    //   location: $("#prop-location").val(),
-    //   type: $("#prop-type").val(),
-    //   transactionType: $("#transcation-type").val(),
-    //   space: $("#space").val(),
-    //   bedroom: $("#bedroom").val(),
-    //   bathroom: $("#bathroom").val(),
-    //   description: $("#description").val()
-    // }
-    // let formdata = new FormData();
-    // let file = document.querySelector("#images").files[0]
-    // if(id == "submit_event"){
-    //   if(data.title == " " || data.topic == " " || data.location == " " || data.date == " " || file == null){
-    //     $("#submit_event").html(`<i class="fas fa-upload"></i>
-    //                     <span>Upload Event</span>`)
-    //     toastr.error("All feilds are required")
-    //     return;
-    //   }
-    //   formdata.append('photo',file);
-    //   formdata.append('submit_event', true)
-    // }
-    // if(id == "update_event"){
-    //   let fileEdit = $("#edit-id").val()
-    //   if(data.title == " " || data.topic == " " || data.location == "" || data.date == " " || fileEdit == " "){
-    //     $("#update_event").html(`<i class="fas fa-upload"></i>
-    //                     <span>Update Event</span>`)
-    //     toastr.error("All feilds are required")
-    //     return;
-    //   }
-    //   formdata.append('id',$("#edit-id").val());
-    //   formdata.append('photo',fileEdit);
-    //   formdata.append('edit_event', true)
-    // }
-    
-    
-    // formdata.append('name',$("#prop-name").val())
-    // formdata.append('location',$("#prop-location").val());
-    // formdata.append('transactionType',$("#prop-type").val());
-    // formdata.append('space', $("#space").val());
-    // formdata.append('bedroom', $("#bedroom").val());
-    // formdata.append('bathroom', $("#bathroom").val());
-    // formdata.append('description', $("#description").val());
-    
-   
-    // $.ajax({
-    //   url: '../../../Controller/requestHandler.php',
-    //   method: 'POST',
-    //   data: formdata,
-    //   cache : false,
-    //   contentType : false,
-    //   processData : false,
-    //   success: (res) => {
-    //     let result = JSON.parse(res)
-    //     console.log(res);
-        
-    //     if(result.status == 200){
-    //       res
-    //       let table = $("#table-body");
-    //       let date = data.date.split(" ")[0]
-    //       let time = data.date.split(" ")[1]
-
-    //       table.prepend(`
-    //       <tr>
-    //                       <td>${data.title}</td>
-    //                       <td>${data.location}</td>
-    //                       <td>${time}</td>
-    //                       <td>${date}</td>
-    //                       <td>${data.topic}</td>
-    //                       <td class="d-flex justify-content-between">
-    //                         <a href="#" class="text-success"  onclick="edit(this.id)"><i class="fa fa-solid fa-pen"></i></a>
-    //                         <a href="#" class="text-danger"  onclick="get(this.id)"><i class="fa fa-solid fa-trash"></i></i></a>
-    //                       </td>
-    //                     </tr>
-    //       `)
-    //       toastr.success('Event Uploaded Successfully')
-    //       $("#submit_event").html(`<i class="fas fa-upload"></i>
-    //                   <span>Upload Event</span>`)
-          
-    //     }else{
-    //       console.log(res);
-    //     }
-        
-        
-    //   }
-    // })
-  //}) 
-  
-  // = (id) => {
-  //   //e.preventDefault(
-
-  //   $(document).ready(function(){
-  //   $("#file-input").on("change", function(){
-  //       var files = $(this)[0].files;
-  //       $("#preview-container").empty();
-  //       if(files.length > 0){
-  //           for(var i = 0; i < files.length; i++){
-  //               var reader = new FileReader();
-  //               reader.onload = function(e){
-  //                   $("<div class='preview'><img src='" + e.target.result + "'><button class='delete'>Delete</button></div>").appendTo("#preview-container");
-  //               };
-  //               reader.readAsDataURL(files[i]);
-  //           }
-  //       }
-  //   });
-// $("#preview-container").on("click", ".delete", function(){
-//         $(this).parent(".preview").remove();
-//         $("#file-input").val(""); // Clear input value if needed
-// });
-
-    // console.log(formdata);
-    
-
+    //console.log(data);
+    })
 </script>
-
 </body>
 </html>

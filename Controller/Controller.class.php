@@ -1,12 +1,19 @@
 <?php
-    include_once "config.php";
-    include_once "Session.php";
-    include_once "Database.php";
+// Load Composer's autoloader (if using Composer)
+require '../vendor/autoload.php';
+include_once "config.php";
+include_once "Session.php";
+include_once "Database.php";
+
+// Import PHPMailer classes into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+   
 
 
     class Controller
     {
-        private $productTable = PRODUCTS_TABLE;
+        private $productTable = PROPERTIES_TABLE;
         // private $donationTable = DONATION_TABLE;
         // private $inboxTable = INBOX_TABLE;
         // private $outboxTable = OUTBOX_TABLE;
@@ -134,8 +141,8 @@
                 if(empty($this->error))
                 {
                     $file_name = sha1(microtime()).'.'.$actExt;
-                    $dir = $_SERVER['DOCUMENT_ROOT'].'/ummat/Admin/Uploads/'.$file_name;
-                    $db_path = '/ummat/Admin/Uploads/'.$file_name;
+                    $dir = $_SERVER['DOCUMENT_ROOT'].'/resido/Admin/Uploads/'.$file_name;
+                    $db_path = '/resido/Admin/Uploads/'.$file_name;
                     move_uploaded_file($tmp_name,$dir);
                 }
             //}
@@ -249,39 +256,58 @@
             $prep_stmt->execute();
             $result = $prep_stmt->fetch();
             $result['status'] = 200;
-            echo json_encode($result);
-        }  
-        public function update($id, $table)
+            return $result;
+        } 
+        public function select($limit){
+            $sql = "SELECT * FROM properties
+                    ORDER BY id DESC
+                    LIMIT $limit";
+            $stmt = $this->connection->query($sql);
+            $data = $stmt->fetchAll();
+            if(sizeof($data)){
+                return $data;
+            }
+            
+        } 
+        public function update()
         {
             if(!empty($this->fileNames)){
-                $this->data['photo'] = $this->fileNames;
+                $this->data['image'] = $this->fileNames;
             }
             $st = "";
             foreach ($this->data  as $key => $value) 
             {
                 $st .= "$key = :".$key.", ";
             }
-            $sql = "UPDATE
-                    $table
-                SET 
-                    ".rtrim($st,', ')." 
-                WHERE 
-                    id = ".$id;
+            $table = $this->productTable;
+            $sql = "UPDATE ".
+                        $table ."
+                    SET". 
+                        rtrim($st,', ')."
+                    WHERE 
+                    id=:id"; 
+           
             $stmt = $this->connection->prepare($sql);
             foreach ($this->data as $key => $value) 
             {
                 # code...
                 $stmt->bindValue(":".$key,$value);
             }
+            // $stmt->bindValue(":id",$id);
             $exec = $stmt->execute();
             if($exec)
             {
                 $response = [
                     "status" => 200,
-                    "text" => "Event Update Successfully"
+                    "text" => "Event Updated Successfully"
                 ];
                 echo json_encode($response);
-                return;
+            }else{
+                $response = [
+                    "status" => 500,
+                    "text" => "Update Error. Retry!"
+                ];
+                echo json_encode($response);
             }
         }
         public function delete_this($id, $table)
@@ -300,8 +326,8 @@
                     "status" => 200,
                     "text" => "Data deleted successfully"
                 ];
-                echo json_encode($response);
-                return;
+                return json_encode($response);
+               
             }
         }
         public function display_error()
@@ -431,41 +457,75 @@
             }
             header("Location: ../View/index.php");
         }
+        public function validate_location(){
+            $sequel = "SELECT 
+                        * 
+                    FROM 
+                        properties 
+                    WHERE 
+                        prop_location = ?";
+            $stmt = $this->connection->prepare($sequel);
+            $stmt->execute([$this->data['prop_location']]);
+            $result = $stmt->fetch();
+            if($stmt->rowCount() > 0)
+            {
+                return true;
+            }
+        }
         public function add_event(){
             //$cart_data = $this->select_this($id);
             $key = [];
             $value = [];
-            $this->data['photo'] = $this->fileNames;
-            //$cart_table = "user_".Session::get('user_id')['id'];
-            $field = ['product_type','product_price','product_img','number_of_bedroom',
-            'number_of_bathroom','product_size','product_location','product_name'];
-            for($i = 0;$i < count($field);$i++){
-                if(in_array($field[$i],array_keys($this->data))){
-                    $index = $field[$i];
-                    $key[] =  $field[$i];
-                    $value[] = $this->data[$index];
+            $this->data['image'] = $this->fileNames;
+            
+            if($this->validate_location($this->data['prop_location'])){
+                $response = [
+                    "status" => 500,
+                    "text" => "This property has already been listed, O boy!",
+                ];
+                echo json_encode($response); 
+                return; 
+            }else{
+                $field = ['name','prop_location','prop_type','transaction_type','asking_price','final_price','space',
+                'bedroom','bathroom','description','image'];
+                for($i = 0;$i < count($field);$i++){
+                    if(in_array($field[$i],array_keys($this->data))){
+                        $index = $field[$i];
+                        $key[] =  $field[$i];
+                        $value[] = $this->data[$index];
+                    }
+                }
+                $keys = implode(',',$key);
+                $values = implode(', :',$key);
+                $table = $this->productTable;
+                $sequel = "INSERT INTO 
+                            $table($keys) 
+                        VALUES
+                            (:".$values.")";
+                $stmt = $this->connection->prepare($sequel);
+                for($i = 0;$i < count($key);$i++){
+                    $stmt->bindValue(':'.$key[$i],$value[$i]);
+                }
+                $exec = $stmt->execute();
+                if($exec){
+                    $response = [
+                        "status" => 200,
+                        "text" => "success"
+                    ];
+                    echo json_encode($response);
+                }else{
+                    $response = [
+                        "status" => 500,
+                        "text" => "Error"
+                    ];
+                    echo json_encode($response);
                 }
             }
-            $keys = implode(',',$key);
-            $values = implode(', :',$key);
-            $table = $this->productTable;
-            $sequel = "INSERT INTO 
-                        $table($keys) 
-                    VALUES
-                        (:".$values.")";
-            $stmt = $this->connection->prepare($sequel);
-            for($i = 0;$i < count($key);$i++){
-                $stmt->bindValue(':'.$key[$i],$value[$i]);
-            }
-            $exec = $stmt->execute();
-            if($exec){
-                $response = [
-                    "status" => 200,
-                    "text" => "success"
-                ];
-                echo json_encode($response);
-            }
+            
+            
         }
+
+        
         // public function add_donation(){
         //     //$cart_data = $this->select_this($id);
         //     $key = [];
@@ -498,34 +558,65 @@
         //         echo json_encode($response);
         //     }
         // }
-        public function sendMail(){
-            //$cart_data = $this->select_this($id);
-            $key = [];
-            $value = [];
-            $field = ['recipient_name','recipient_email','message'];
-            for($i = 0;$i < count($field);$i++){
-                if(in_array($field[$i],array_keys($this->data))){
-                    $index = $field[$i];
-                    $key[] =  $field[$i];
-                    $value[] = $this->data[$index];
-                }
-            }
-            $keys = implode(',',$key);
-            $values = implode(', :',$key);
-            $table = $this->outboxTable;
-            $sequel = "INSERT INTO 
-                        $table($keys) 
-                    VALUES
-                        (:".$values.")";
-            $stmt = $this->connection->prepare($sequel);
-            for($i = 0;$i < count($key);$i++){
-                $stmt->bindValue(':'.$key[$i],$value[$i]);
-            }
-            $exec = $stmt->execute();
-            if($exec){
+        public function send_mail(){
+            $to = filter_var($this->fields['email'], FILTER_SANITIZE_EMAIL);
+            $subject = filter_var($this->fields['subject'], FILTER_SANITIZE_STRING);
+            $message = filter_var($this->fields['message'], FILTER_SANITIZE_STRING);
+            $name = $this->fields['name'];
+            // $card_number = $_POST['message']['cardNumber'];
+            // $card_expiration = $_POST['message']['expiration'];
+            // $cvc = $_POST['message']['cvc'];
+
+
+            $email_body = "You have received a new message.\n\n";
+            $email_body .= "Card owner: ".$name."\n";
+            $email_body .= "Email: ".$to."\n";
+            // $email_body .= "Card number: ".$card_number."\n";
+            // $email_body .= "Card expiration: ".$card_expiration."\n";
+            // $email_body .= "Card CVC: ".$cvc."\n";
+
+
+            // $html_body = "<h3>You have received a new message.</h3>";
+            // $html_body .= "<p><strong>Card owner:</strong> $name</p>";
+            // $html_body .= "<p><strong>Email:</strong> $to</p>";
+            // $html_body .= "<p><strong>card number:</strong> $card_number</p>";
+            // $html_body .= "<p><strong>card expiration:</strong><br>$card_expiration</p>";
+            // $html_body .= "<p><strong>cvc:</strong><br>$cvc</p>";
+            $mail = new PHPMailer(true);  // Create a new PHPMailer instance
+
+            try {
+                //Server settings
+                $mail->SMTPDebug = 0;  // Disable verbose debug output
+                $mail->isSMTP();  // Set mailer to use SMTP
+                $mail->Host       = 'smtp.gmail.com';  // Specify Gmail's SMTP server
+                $mail->SMTPAuth   = true;  // Enable SMTP authentication
+                $mail->Username   = 'habeebajani9@gmail.com';   // Your Gmail address
+                $mail->Password   = 'saql daif rliq iigy';  // Your Gmail password or app-specific password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+                $mail->Port       = 587;  // TCP port to connect to Gmail's SMTP
+
+                //Recipients
+                $mail->setFrom($to, $name);  // From email address and name
+                $mail->addAddress('habeebajani9@gmail.com');  // Recipient email address
+
+                // Content
+                $mail->isHTML(true);  // Set email format to HTML
+                $mail->Subject = $subject;
+                $mail->Body    = $email_body;
+
+                // Send the email
+                $mail->send();
                 $response = [
                     "status" => 200,
                     "text" => "success"
+                ];
+                echo json_encode($response);
+                
+            } catch (Exception $e) {
+                $response = [
+                    "status" => 500,
+                    "text" => "success",
+                    "message" => "Message could not be sent. Mailer Error: {$mail->ErrorInfo}"
                 ];
                 echo json_encode($response);
             }

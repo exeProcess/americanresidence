@@ -1,3 +1,15 @@
+<?php
+    include_once "Controller/Controller.class.php";
+    include_once "Controller/Database.php";
+    
+    if(isset($_GET['id'])){
+        $dbh = new Database;
+        $db = $dbh->connect();
+        $ctrl = new Controller($db);
+        $id = $_GET['id'];
+        $data = $ctrl->select_this($id, "properties");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,36 +83,29 @@
         <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                <a href="index.php" class="navbar-brand d-flex align-items-center text-center">
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
-                    <h1 class="m-0 text-primary">Resido</h1>
+                    <!-- <h1 class="m-0 text-primary">Resido</h1> -->
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="property-list.html" class="nav-item nav-link">Property List</a>
-                        <!-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                        <a href="index.php" class="nav-item nav-link active">Home</a>
+                        <a href="about.php" class="nav-item nav-link">About</a>
+                        <a href="property-list.php" class="nav-item nav-link">Property List</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Application</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="property-list.html" class="dropdown-item">Property List</a>
-                                <a href="property-type.html" class="dropdown-item">Property Type</a>
-                                <a href="property-agent.html" class="dropdown-item">Property Agent</a>
+                                <a href="testimonial.php" class="dropdown-item">Renewal</a>
+                                <a href="404.html" class="dropdown-item">Make payment</a>
                             </div>
-                        </div> -->
-                        <!-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                <a href="404.html" class="dropdown-item">404 Error</a>
-                            </div>
-                        </div> -->
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        </div>
+                        <a href="contact.php" class="nav-item nav-link">Contact</a>
+                        
                     </div>
                     <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
                 </div>
@@ -119,19 +124,19 @@
                 <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="property-item rounded overflow-hidden">
                         <div class="position-relative overflow-hidden">
-                            <a href=""><img class="img-fluid" src="img/property-2.jpg" alt=""></a>
-                            <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Villa</div>
+                            <a href=""><img class="img-fluid" src="<?= $data['image']?>" alt=""></a>
+                            <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"><?= $data['transaction_type']?></div>
+                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3"><?= $data['prop_type']?></div>
                         </div>
                         <div class="p-4 pb-0">
-                            <h5 class="text-primary mb-3">$12,345</h5>
-                            <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                            <h5 class="text-primary mb-3"><?= $data['asking_price']?></h5>
+                            <a class="d-block h5 mb-2" href=""><?= $data['name']?></a>
+                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i><?= $data['prop_location']?></p>
                         </div>
                         <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i><?= $data['asking_price']." Sqft"?></small>
+                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i><?= $data['asking_price']." Bed"?></small>
+                            <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i><?= $data['asking_price']." Bath"?></small>
                         </div>
                     </div>
                 </div>
@@ -148,7 +153,7 @@
                                 <div class="d-flex flex-row align-items-center com-color"> <i class="fa fa-plus-circle"></i> <span class="ml-1">Add Insurer card</span> </div>
                             </div> -->
                             <p>
-                                Elegant 2-bedroom, 2-bath apartment in The Heights, Unit 305, downtown Springfield. 
+                                <!-- Elegant 2-bedroom, 2-bath apartment in The Heights, Unit 305, downtown Springfield. 
                                 This 1,200 sq. ft. gem features an open-concept living area with hardwood floors 
                                 and large windows showcasing stunning city views. The modern kitchen is equipped 
                                 with stainless steel appliances, quartz countertops, and ample storage. 
@@ -156,7 +161,8 @@
                                 with dual sinks and a soaking tub. A private balcony extends your living space outdoors. 
                                 Enjoy top-notch amenities such as a fitness center, rooftop garden, and secure parking. 
                                 Located within walking distance to vibrant shops, restaurants, and public transit, 
-                                this apartment offers both comfort and convenience in a prime urban setting.
+                                this apartment offers both comfort and convenience in a prime urban setting. -->
+                                <?= $data['description']?>
                             </p>
                             <!-- <div class="p-2 d-flex justify-content-between bg-pay align-items-center"> <span>Aetna - Open Access</span> <span>OAP</span> </div> -->
                             <hr>
@@ -196,7 +202,7 @@
                                 </label> </div>
                             <div class="buttons"> <button class="btn btn-success btn-block">Proceed to payment</button> </div> -->
                             <!-- <div class="buttons"> <button class="btn btn-success btn-block">Proceed</button> </div> -->
-                            <div class="d-flex justify-content-between align-items-center">
+                            <!-- <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row my-4">
                                     <h6> Available Payment Plans</h6>
                                 </div>
@@ -230,7 +236,7 @@
 
 
                             
-                        </div>
+                        </div> -->
                     <!-- </div> -->
                 </div>
             <!-- </div> -->

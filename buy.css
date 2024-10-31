@@ -9,7 +9,7 @@
   }
   
   body {
-    background: url('https://images.pexels.com/photos/2876787/pexels-photo-2876787.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background: url('./img/property-2.jpg');
     background-position: center;
     background-size: cover;
     backdrop-filter: blur(8px);
@@ -45,7 +45,7 @@
   
   /* Left Side Of Container */
   .left-side {
-    background: url('https://images.pexels.com/photos/2876787/pexels-photo-2876787.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+    background: url("./img/property-2.jpg");
     background-position: center;
     background-size: cover;
     position: relative;

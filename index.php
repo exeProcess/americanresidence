@@ -10,7 +10,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Resido - Real Estate HTML Template</title>
+    <title>America Residence</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -51,31 +51,28 @@
         <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
-                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                <a href="index.php" class="navbar-brand d-flex align-items-center text-center">
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
-                    <h1 class="m-0 text-primary">Resido</h1>
+                    <!-- <h1 class="m-0 text-primary">Resido</h1> -->
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
-                        <a href="property-list.html" class="nav-item nav-link">Property List</a>
+                        <a href="index.php" class="nav-item nav-link active">Home</a>
+                        <a href="about.php" class="nav-item nav-link">About</a>
+                        <a href="property-list.php" class="nav-item nav-link">Property List</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Log in</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Application</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.html" class="dropdown-item">Application & Renewal</a>
+                                <a href="testimonial.php" class="dropdown-item">Renewal</a>
                                 <a href="404.html" class="dropdown-item">Make payment</a>
-                                <a href="404.html" class="dropdown-item">Sign up</a>
-                                <hr>
-                                <a href="404.html" class="dropdown-item">Log in</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="contact.php" class="nav-item nav-link">Contact</a>
                         
                     </div>
                     <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
@@ -92,7 +89,7 @@
                     <h1 class="display-5 animated fadeIn mb-4">Find A <span class="text-primary">Perfect Home</span> To Live With Your Family</h1>
                     <p class="animated fadeIn mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
                         sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                    <a href="contact.html#contact-form" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Discuss your plan</a>
+                    <a href="contact.php#contact-form" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Discuss your plan</a>
                 </div>
                 <div class="col-md-6 animated fadeIn">
                     <div class="owl-carousel header-carousel">
@@ -299,8 +296,11 @@
                             <li class="nav-item me-2">
                                 <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">For Sell</a>
                             </li>
-                            <li class="nav-item me-0">
+                            <li class="nav-item me-2">
                                 <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Rent</a>
+                            </li>
+                            <li class="nav-item me-0">
+                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Lease</a>
                             </li>
                         </ul>
                     </div>
@@ -308,7 +308,7 @@
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <!-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
                                         <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a>
@@ -326,27 +326,34 @@
                                         <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
+                            <?php
+                                $properties = $ctrl->select(6);
+                                foreach($properties as $property):
+                            ?>
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
-                                        <a href="cart.html"><img class="img-fluid" src="img/property-2.jpg" alt=""></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Villa</div>
+                                        <a href="cart.php?id=<?= $property['id']?>"><img class="img-fluid" src="<?= $property['image']?>" alt=""></a>
+                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"><?="For ".$property['transaction_type']?></div>
+                                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3"><?= $property['prop_type']?></div>
                                     </div>
                                     <div class="p-4 pb-0">
-                                        <h5 class="text-primary mb-3">$12,345</h5>
-                                        <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                        <h5 class="text-primary mb-3"><?= "$".$property['asking_price']?></h5>
+                                        <a class="d-block h5 mb-2" href=""><?= $property['name']?></a>
+                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i><?= $property['prop_location']?></p>
                                     </div>
                                     <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i><?= $property['space']. " sqft"?></small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i><?= $property['bedroom']." Bed"?></small>
+                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i><?= $property['bathroom']." Bath"?></small>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                            <?php
+                                endforeach;
+                            ?>
+                            <!-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
                                         <a href=""><img class="img-fluid" src="img/property-3.jpg" alt=""></a>
@@ -542,7 +549,7 @@
                                         <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-12 text-center">
                                 <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
                             </div>
@@ -554,7 +561,7 @@
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
                                         <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a>
-                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
+                                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
                                         <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>
                                     </div>
                                     <div class="p-4 pb-0">
@@ -689,7 +696,7 @@
                                     <h1 class="mb-3">Contact With Our Certified Agent</h1>
                                     <p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p>
                                 </div>
-                                <a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Contact an agent</a>
+                                <a href="contact.php#contact-form" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Contact an agent</a>
                                 <!-- <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a> -->
                             </div>
                         </div>
@@ -889,19 +896,17 @@
                 <div class="copyright">
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved. 
+                            &copy; <a class="border-bottom" href="#">American Residence</a>, All Right Reserved. 
 							
-							<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-							Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
                         </div>
-                        <div class="col-md-6 text-center text-md-end">
+                        <!-- <div class="col-md-6 text-center text-md-end">
                             <div class="footer-menu">
                                 <a href="">Home</a>
                                 <a href="">Cookies</a>
                                 <a href="">Help</a>
                                 <a href="">FQAs</a>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

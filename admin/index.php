@@ -201,30 +201,28 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./pages/tables/data.php" class="nav-link">
+                <a href="./pages/tables/clone.php" class="nav-link">
                   <i class="nav-icon fas fa-th"></i>
                   <p>
                     Manage Products
                   </p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="./pages/tables/donation.php" class="nav-link">
+              <li class="nav-item">
+                <a href="./pages/tables/data.php" class="nav-link">
                   <i class="nav-icon fas fa-copy"></i>
                   <p>
-                    Donations
-                    <i class="fas fa-angle-left right"></i>
-                    <span class="badge badge-info right">6</span>
+                    Property List
+                    
                   </p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./pages/tables/ads.php" class="nav-link">
+              <!-- <li class="nav-item">
+                <a href="./pages/tables/edit.php" class="nav-link">
                   <i class="nav-icon fas fa-copy"></i>
                   <p>
-                    Ads Management
-                    <i class="fas fa-angle-left right"></i>
-                    <span class="badge badge-info right">6</span>
+                    Edit Property
+                    
                   </p>
                 </a>
               </li> -->
