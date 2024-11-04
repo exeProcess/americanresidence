@@ -35,6 +35,99 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    <style>
+         /* Modal content box styling */
+    .modal-login-content {
+      background-color: white;
+      padding: 40px;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Preloader styling inside modal */
+    .login-preloader {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    .signup-modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Modal content box styling */
+    .modal-signup-content {
+      background-color: white;
+      padding: 40px;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Preloader styling inside modal */
+    .signup-preloader {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Hidden login form container */
+    .login-form {
+      display: none; /* Hidden by default */
+    }
+
+    /* Button styling */
+    .close-btn, .login-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover, .login-btn:hover {
+      background-color: #2980b9;
+    }
+    </style>
 </head>
 
 <body>
@@ -66,10 +159,14 @@
                         <a href="about.php" class="nav-item nav-link">About</a>
                         <a href="property-list.php" class="nav-item nav-link">Property List</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Application</a>
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Log in</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.php" class="dropdown-item">Renewal</a>
+                                <a href="testimonial.php" class="dropdown-item">Application & Renewal</a>
+                                <a href="404.html" class="dropdown-item"></a>
                                 <a href="404.html" class="dropdown-item">Make payment</a>
+                                <a href="#" onclick="openSignUpModal()" class="dropdown-item">Sign Up</a>
+                                <hr>
+                                <a href="#" id="login" onclick="openLoginModal()" class="dropdown-item">Log in</a>
                             </div>
                         </div>
                         <a href="contact.php" class="nav-item nav-link">Contact</a>
@@ -913,11 +1010,51 @@
         </div>
         <!-- Footer End -->
 
-
+        <div class="login-modal" id="loginModal">
+        <!-- Modal Content -->
+        <div class="modal-login-content">
+            <!-- Preloader -->
+            <div class="login-preloader" id="preloader"></div>
+            
+            <!-- Login Form Content -->
+            <div class="login-form" id="loginForm">
+            <h2>Login</h2>
+            <input type="text" placeholder="Username" id="username" required>
+            <br><br>
+            <input type="password" placeholder="Password" id="password" required>
+            <br><br>
+            <button class="login-btn" onclick="login()">Login</button>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+        </div>
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
     </div>
 
+    <!-- Sign Up Modal -->
+    <div class="sign-modal" id="signUpModal">
+    <!-- Modal Content -->
+    <div class="modal-sign-content">
+        <!-- Preloader -->
+        <div class="sign-preloader" id="preloader"></div>
+        
+        <!-- Sign Up Form Content -->
+        <div class="sign-up-form" id="signUpForm">
+        <h2>Sign Up</h2>
+        <input type="text" placeholder="Username" id="username" required>
+        <br><br>
+        <input type="email" placeholder="Email" id="email" required>
+        <br><br>
+        <input type="password" placeholder="Password" id="password" required>
+        <br><br>
+        <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
+        <br><br>
+        <button class="sign-up-btn" onclick="signUp()">Sign Up</button>
+        <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+    </div>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -928,6 +1065,45 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+        function openSignUpModal() {
+            document.getElementById("signUpModal").style.display = "flex"; // Show the modal
+            setTimeout(() => {
+            document.getElementById("signup-preloader").style.display = "none"; // Hide preloader
+            document.getElementById("signUpForm").style.display = "block"; // Show sign-up form
+            }, 2000); // Delay of 2 seconds for preloader
+        }
+
+        function closeModal() {
+            document.getElementById("signUpModal").style.display = "none";
+            document.getElementById("login-preloader").style.display = "flex";
+            document.getElementById("signUpForm").style.display = "none";
+        }
+
+        function signUp() {
+            // Your sign-up logic here
+            alert("Sign Up button clicked");
+        }
+        function openLoginModal() {
+            // id.preventDeafualt()
+            document.getElementById("loginModal").style.display = "flex"; // Show the modal
+            setTimeout(() => {
+            document.getElementById("preloader").style.display = "none"; // Hide preloader
+            document.getElementById("loginForm").style.display = "block"; // Show login form
+            }, 4000); // Delay of 2 seconds for preloader
+        }
+
+        function closeModal() {
+            document.getElementById("loginModal").style.display = "none";
+            document.getElementById("preloader").style.display = "flex";
+            document.getElementById("loginForm").style.display = "none";
+        }
+
+        function login() {
+            // Your login logic here
+            alert("Login button clicked");
+        }
+    </script>
 </body>
 
 </html>

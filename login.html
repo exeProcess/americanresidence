@@ -1,157 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Base styling */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-        
-        /* Sidebar styling */
-        .sidebar {
-            width: 250px;
-            background-color: #333;
-            color: #fff;
-            padding-top: 20px;
-            position: fixed;
-            height: 100%;
-        }
-        
-        .sidebar h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .sidebar ul li {
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #444;
-        }
-        
-        .sidebar ul li a {
-            color: #fff;
-            text-decoration: none;
-            display: block;
-        }
-        
-        .sidebar ul li:hover {
-            background-color: #555;
-        }
-        
-        /* Main content styling */
-        .main-content {
-            margin-left: 250px;
-            padding: 20px;
-            flex: 1;
-            background-color: #f4f4f4;
-            overflow-y: auto;
-        }
-        
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: #fff;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .header .title {
-            font-size: 24px;
-            color: #333;
-        }
-        
-        .header .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        /* Dashboard cards styling */
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .card {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        
-        .card h3 {
-            font-size: 20px;
-            color: #333;
-        }
-        
-        .card p {
-            font-size: 24px;
-            color: #555;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navbar Sign Up Modal with Preloader</title>
+  <style>
+    /* Navbar styling */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      background-color: #333;
+      padding: 10px;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+    }
+
+    .navbar a:hover {
+      background-color: #575757;
+      border-radius: 4px;
+    }
+
+    /* Modal overlay styling */
+    .signup-modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Dark overlay */
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Modal content box styling */
+    .modal-signup-content {
+      background-color: white;
+      padding: 40px;
+      border-radius: 5px;
+      width: 300px;
+      text-align: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Preloader styling inside modal */
+    .signup-preloader {
+      width: 40px;
+      height: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #3498db;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Hidden sign-up form container */
+    .sign-up-form {
+      display: none; /* Hidden by default */
+    }
+
+    /* Button styling */
+    .close-btn, .sign-up-btn {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .close-btn:hover, .sign-up-btn:hover {
+      background-color: #2980b9;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>Admin Dashboard</h2>
-        <ul>
-            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="#"><i class="fas fa-users"></i> Users</a></li>
-            <li><a href="#"><i class="fas fa-chart-line"></i> Analytics</a></li>
-            <li><a href="#"><i class="fas fa-cogs"></i> Settings</a></li>
-            <li><a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-        </ul>
-    </div>
+<!-- Navbar -->
+<div class="navbar">
+  <a href="#">Home</a>
+  <a href="#">About</a>
+  <a href="#" onclick="openModal()">Sign Up</a> <!-- Link to open modal -->
+  <a href="#">Contact</a>
+</div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Header -->
-        <div class="header">
-            <div class="title">Dashboard</div>
-            <div class="user-info">
-                <span>Admin</span>
-                <i class="fas fa-user-circle fa-2x"></i>
-            </div>
-        </div>
-
-        <!-- Dashboard Cards -->
-        <div class="cards">
-            <div class="card">
-                <h3>Total Users</h3>
-                <p>1,234</p>
-            </div>
-            <div class="card">
-                <h3>New Orders</h3>
-                <p>567</p>
-            </div>
-            <div class="card">
-                <h3>Sales</h3>
-                <p>$12,345</p>
-            </div>
-            <div class="card">
-                <h3>Feedback</h3>
-                <p>89</p>
-            </div>
-        </div>
+<!-- Sign Up Modal -->
+<div class="modal" id="signUpModal">
+  <!-- Modal Content -->
+  <div class="modal-content">
+    <!-- Preloader -->
+    <div class="preloader" id="preloader"></div>
+    
+    <!-- Sign Up Form Content -->
+    <div class="sign-up-form" id="signUpForm">
+      <h2>Sign Up</h2>
+      <input type="text" placeholder="Username" id="username" required>
+      <br><br>
+      <input type="email" placeholder="Email" id="email" required>
+      <br><br>
+      <input type="password" placeholder="Password" id="password" required>
+      <br><br>
+      <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
+      <br><br>
+      <button class="sign-up-btn" onclick="signUp()">Sign Up</button>
+      <button class="close-btn" onclick="closeModal()">Close</button>
     </div>
+  </div>
+</div>
+
+<!-- JavaScript for Modal & Preloader -->
+<script>
+  function openModal() {
+    document.getElementById("signUpModal").style.display = "flex"; // Show the modal
+    setTimeout(() => {
+      document.getElementById("preloader").style.display = "none"; // Hide preloader
+      document.getElementById("signUpForm").style.display = "block"; // Show sign-up form
+    }, 2000); // Delay of 2 seconds for preloader
+  }
+
+  function closeModal() {
+    document.getElementById("signUpModal").style.display = "none";
+    document.getElementById("preloader").style.display = "flex";
+    document.getElementById("signUpForm").style.display = "none";
+  }
+
+  function signUp() {
+    // Your sign-up logic here
+    alert("Sign Up button clicked");
+  }
+</script>
 
 </body>
 </html>
