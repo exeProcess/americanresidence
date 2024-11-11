@@ -40,13 +40,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isSMTP();  // Set mailer to use SMTP
         $mail->Host       = 'mail.americareside.com';  // Specify Gmail's SMTP server
         $mail->SMTPAuth   = true;  // Enable SMTP authentication
-        $mail->Username   = 'admin@americareside.com';   // Your Gmail address
+        $mail->Username   = 'agent@americareside.com';   // Your Gmail address
         $mail->Password   = 'MM8L6jsjdqJ~';  // Your Gmail password or app-specific password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
         $mail->Port       = 465;  // TCP port to connect to Gmail's SMTP
 
         //Recipients
-        $mail->setFrom('admin@americareside.com', 'American Residence');  // From email address and name
+        $mail->setFrom('ajani_habeeb88@yahoo.com', 'Habeeb');  // From email address and name
         $mail->addAddress($to);  // Recipient email address
 
         // Content

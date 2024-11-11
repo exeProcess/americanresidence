@@ -350,7 +350,7 @@ use PHPMailer\PHPMailer\Exception;
             $sequel = "SELECT 
                     * 
                 FROM 
-                    user 
+                    users 
                 WHERE 
                     email = ?";
             $stmt = $this->connection->prepare($sequel);
@@ -366,7 +366,7 @@ use PHPMailer\PHPMailer\Exception;
             }else
             {
                 $sequel = "INSERT INTO 
-                        user ($keys) 
+                        users ($keys) 
                     VALUES 
                         (:".$values.")";
                 $stmt = $this->connection->prepare($sequel);
@@ -392,7 +392,7 @@ use PHPMailer\PHPMailer\Exception;
             $sequel = "SELECT 
                         * 
                     FROM 
-                        user 
+                        users 
                     WHERE 
                         email = ?";
             $stmt = $this->connection->prepare($sequel);
@@ -477,7 +477,8 @@ use PHPMailer\PHPMailer\Exception;
             $key = [];
             $value = [];
             $this->data['image'] = $this->fileNames;
-            
+            $transaction_code = $this->generateUniqueCode(16);
+            $this->data['transaction_code'] = $transaction_code;
             if($this->validate_location($this->data['prop_location'])){
                 $response = [
                     "status" => 500,
@@ -487,7 +488,7 @@ use PHPMailer\PHPMailer\Exception;
                 return; 
             }else{
                 $field = ['name','prop_location','prop_type','transaction_type','asking_price','final_price','space',
-                'bedroom','bathroom','description','image'];
+                'bedroom','bathroom','description','image','transaction_code'];
                 for($i = 0;$i < count($field);$i++){
                     if(in_array($field[$i],array_keys($this->data))){
                         $index = $field[$i];
@@ -559,12 +560,12 @@ use PHPMailer\PHPMailer\Exception;
         //     }
         // }
         public function send_mail(){
-            $sender_email = filter_var($this->fields['email'], FILTER_SANITIZE_EMAIL);
-            $to = "agent@americareside.com";
-            $subject = filter_var($this->fields['subject'], FILTER_SANITIZE_STRING);
-            $message = filter_var($this->fields['message'], FILTER_SANITIZE_STRING);
-            $name = $this->fields['name'];
-            $headers = "From: ".$sender_email;
+            $sender_email = filter_var($this->data['email'], FILTER_SANITIZE_EMAIL);
+            $to = "habeebajani9@gmail.com";
+            $subject = filter_var($this->data['subject'], FILTER_SANITIZE_STRING);
+            $message = filter_var($this->data['message'], FILTER_SANITIZE_STRING);
+            $name = $this->data['name'];
+            $headers = "From: agent@americareside.com";
             if(mail($to, $subject, $message, $headers)){
                 echo "Message sent";
             }else{
@@ -572,6 +573,23 @@ use PHPMailer\PHPMailer\Exception;
             }
             
         }
+        private function generateUniqueCode($length = 8) {
+            // Generate a unique ID based on the current time in microseconds
+            $uniqueId = uniqid();
+        
+            // Generate a random string of the specified length
+            $randomString = bin2hex(random_bytes($length));
+        
+            // Combine the unique ID with the random string
+            $uniqueCode = $uniqueId . $randomString;
+        
+            // Return a truncated version of the generated code (optional, for fixed length)
+            return substr($uniqueCode, 0, $length);
+        }
+        
+        // Example usage
+        // echo generateUniqueCode(16); // generates a random unique code with length 16
+        
     }
 
 ?>

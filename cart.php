@@ -202,7 +202,7 @@
                                 </label> </div>
                             <div class="buttons"> <button class="btn btn-success btn-block">Proceed to payment</button> </div> -->
                             <!-- <div class="buttons"> <button class="btn btn-success btn-block">Proceed</button> </div> -->
-                            <!-- <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row my-4">
                                     <h6> Available Payment Plans</h6>
                                 </div>
@@ -216,12 +216,12 @@
                                     </div>
                                 </label>
                                 <br> 
-                                <label class="radio">
+                                <!-- <label class="radio">
                                     <div class="d-flex justify-content-between">
                                         <span>Installmental Payment Plan</span> 
                                         <span><i class="fa fa-plus-circle icon" id="icon1"></i></span> 
                                     </div>
-                                </label>
+                                </label> -->
                                 <br>
                                 <label class="radio"> 
                                     <div class="d-flex justify-content-between"> 
@@ -231,12 +231,12 @@
                                 </label>  
                             </div>
                             <div class="buttons my-4"> 
-                                <a href="checkout.html" class="btn btn-success btn-block">Proceed</a> 
+                                <a href="buy.php?id=<?= $id?>" class="btn btn-success btn-block">Proceed</a> 
                             </div>
 
 
                             
-                        </div> -->
+                        </div>
                     <!-- </div> -->
                 </div>
             <!-- </div> -->

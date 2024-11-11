@@ -39,7 +39,7 @@ function sendEmail($toEmail, $subject, $body) {
         $mail->Host       = 'smtp.gmail.com';  // Specify Gmail's SMTP server
         $mail->SMTPAuth   = true;  // Enable SMTP authentication
         $mail->Username   = 'habeebajani9@gmail.com';   // Your Gmail address
-        $mail->Password   = 'saql daif rliq iigy';  // Your Gmail password or app-specific password
+        $mail->Password   = 'saql daif rliq iigf';  // Your Gmail password or app-specific password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
         $mail->Port       = 587;  // TCP port to connect to Gmail's SMTP
 

@@ -44,12 +44,7 @@
   }
   
   /* Left Side Of Container */
-  .left-side {
-    background: url("./img/property-2.jpg");
-    background-position: center;
-    background-size: cover;
-    position: relative;
-  }
+
   
   .text-box {
     background: rgba(95, 121, 134, 0.8);
@@ -181,6 +176,8 @@
     margin-bottom: 1rem;
     padding: 1.5rem;
     cursor: pointer;
+    display: grid;              /* Use grid layout */
+            place-items: center;
   }
   
   .btn:hover {
