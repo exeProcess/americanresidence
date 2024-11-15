@@ -142,7 +142,7 @@ include_once "Database.php";
                 {
                     $file_name = sha1(microtime()).'.'.$actExt;
                     $dir = $_SERVER['DOCUMENT_ROOT'].'/resido/Admin/Uploads/'.$file_name;
-                    $db_path = '/resido/Admin/Uploads/'.$file_name;
+                    $db_path = '/resido/admin/Uploads/'.$file_name;
                     move_uploaded_file($tmp_name,$dir);
                 }
             //}
