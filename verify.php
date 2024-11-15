@@ -124,7 +124,7 @@
                     success: (res) => {
                         if(res == "success"){
                             
-                            window.location.href = "success.html"
+                            window.location.href = "success.php"
                         
                         }
                         // setTimeout(function() {
