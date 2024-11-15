@@ -158,29 +158,25 @@
                         <a href="index.php" class="nav-item nav-link active">Home</a>
                         <a href="about.php" class="nav-item nav-link">About</a>
                         <a href="property-list.php" class="nav-item nav-link">Property List</a>
-                        <?php if(!isset($_SESSION['user'])):?>
-                            <div class="nav-item dropdown">
+                        
+                            <!-- <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Log in</a>
                                 <div class="dropdown-menu rounded-0 m-0">
                                     <a href="#" onclick="openSignUpModal()" class="dropdown-item">Sign Up</a>
                                     <hr>
                                     <a href="#" id="login" onclick="openLoginModal()" class="dropdown-item">Log in</a>
                                 </div>
-                            </div>
-                        <?php else:?>
-                            <div class="nav-item dropdown">
+                            </div> -->
+                        
+                            <!-- <div class="nav-item dropdown"> -->
                                 <!-- <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Log in</a> -->
-                                <a href="#"><i class="nav-link dropdown-toggle fas fa-user-circle" data-bs-toggle="dropdown"></i></a>
-                                <div class="dropdown-menu rounded-0 m-0">
+                                <!-- <a href="#"><i class="nav-link dropdown-toggle fas fa-user-circle" data-bs-toggle="dropdown"></i></a> -->
+                                <!-- <div class="dropdown-menu rounded-0 m-0">
                                     <a href="application.php" class="dropdown-item">Application</a>
                                     <a href="renewal.php" class="dropdown-item">Renewal</a>
                                     <a href="404.html" class="dropdown-item">Make payment</a>
                                     <!-- <a href="#" onclick="openSignUpModal()" class="dropdown-item">Sign Up</a> -->
-                                    <hr>
-                                    <a href="#" id="login" onclick="openLoginModal()" class="dropdown-item">Sign out</a>
-                                </div>
-                            </div>
-                        <?php endif;?>
+                              
                         <a href="contact.php" class="nav-item nav-link">Contact</a>
                         
                     </div>
