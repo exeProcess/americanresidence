@@ -6,8 +6,8 @@ include_once "Session.php";
 include_once "Database.php";
 
 // Import PHPMailer classes into the global namespace
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
    
 
 
@@ -269,43 +269,119 @@ use PHPMailer\PHPMailer\Exception;
             }
             
         } 
+        // public function update()
+        // {
+        //     if(!empty($this->fileNames)){
+        //         $this->data['image'] = $this->fileNames;
+        //     }
+        //     $st = "";
+        //     foreach ($this->data  as $key => $value) 
+        //     {
+        //         $st .= "$key = :".$key.", ";
+        //     }
+        //     $table = $this->productTable;
+        //     $sql = "UPDATE ".
+        //                 $table ."
+        //             SET". 
+        //                 rtrim($st,', ')."
+        //             WHERE 
+        //             id=:id"; 
+           
+        //     $stmt = $this->connection->prepare($sql);
+        //     foreach ($this->data as $key => $value) 
+        //     {
+        //         # code...
+        //         $stmt->bindValue(":".$key,$value);
+        //     }
+        //     // $stmt->bindValue(":id",$id);
+        //     $exec = $stmt->execute();
+        //     if($exec)
+        //     {
+        //         $response = [
+        //             "status" => 200,
+        //             "text" => "Event Updated Successfully"
+        //         ];
+        //         echo json_encode($response);
+        //     }else{
+        //         $response = [
+        //             "status" => 500,
+        //             "text" => "Update Error. Retry!"
+        //         ];
+        //         echo json_encode($response);
+        //     }
+        // }
         public function update()
         {
-            if(!empty($this->fileNames)){
-                $this->data['image'] = $this->fileNames;
+            // Ensure the fileNames is not empty before assigning
+            if (!empty($this->fileNames)) {
+                $this->data['image'] = $this->fileNames; // Assuming $this->fileNames is an array or string
             }
+
+            // Prepare the SQL update statement
             $st = "";
-            foreach ($this->data  as $key => $value) 
-            {
-                $st .= "$key = :".$key.", ";
+            foreach ($this->data as $key => $value) {
+                // Skip the 'id' field in the set part of the query
+                if ($key !== 'id') {
+                    $st .= "$key = :$key, ";
+                }
             }
-            $table = $this->productTable;
-            $sql = "UPDATE ".
-                        $table ."
-                    SET". 
-                        rtrim($st,', ')."
-                    WHERE 
-                    id=:id"; 
-           
-            $stmt = $this->connection->prepare($sql);
-            foreach ($this->data as $key => $value) 
-            {
-                # code...
-                $stmt->bindValue(":".$key,$value);
-            }
-            // $stmt->bindValue(":id",$id);
-            $exec = $stmt->execute();
-            if($exec)
-            {
-                $response = [
-                    "status" => 200,
-                    "text" => "Event Updated Successfully"
-                ];
-                echo json_encode($response);
-            }else{
+
+            // Remove the trailing comma and space
+            $st = rtrim($st, ', ');
+
+            // Make sure the table name exists
+            $table = isset($this->productTable) ? $this->productTable : 'properties';
+
+            // Final SQL query with dynamic values
+            $sql = "UPDATE $table SET $st WHERE id = :id";
+
+            try {
+                // Prepare the statement
+                $stmt = $this->connection->prepare($sql);
+
+                // Bind all the values dynamically except the 'id' field
+                foreach ($this->data as $key => $value) {
+                    if ($key !== 'id') {
+                        $stmt->bindValue(":$key", $value);
+                    }
+                }
+
+                // Bind the id separately for clarity
+                if (isset($this->data['id'])) {
+                    $stmt->bindValue(':id', $this->data['id']);
+                } else {
+                    throw new Exception('ID is required for updating a record.');
+                }
+
+                // Execute the statement
+                $exec = $stmt->execute();
+
+                // Check the result of the execution
+                if ($exec) {
+                    $response = [
+                        "status" => 200,
+                        "text" => "Event Updated Successfully"
+                    ];
+                    echo json_encode($response);
+                } else {
+                    $response = [
+                        "status" => 500,
+                        "text" => "Update Error. Retry!"
+                    ];
+                    echo json_encode($response);
+                }
+            } catch (PDOException $e) {
+                // Handle PDO exceptions (like connection issues)
                 $response = [
                     "status" => 500,
-                    "text" => "Update Error. Retry!"
+                    "text" => "Database error: " . $e->getMessage()
+                ];
+                echo json_encode($response);
+            } catch (Exception $e) {
+                // Handle other exceptions (e.g. missing 'id')
+                $response = [
+                    "status" => 400,
+                    "text" => "Error: " . $e->getMessage()
                 ];
                 echo json_encode($response);
             }

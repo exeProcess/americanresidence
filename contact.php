@@ -200,14 +200,14 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <!-- <input type="text" class="form-control" id="subject" placeholder="Subject"> -->
-                                            
-                                            <select class="select" id="subject">
+                                            <input type="text" class="form-control" id="subject" placeholder="Subject">
+                                            <label for="subject">Subject</label>
+                                            <!-- <select class="select" id="subject">
                                                 <option value="Inquiry">Subject</option>
                                                 <option value="Inquiry">Inquiry</option>
                                                 <option value="Negotiation">Negotiation</option>
                                                 <option value="Apply">Application Renewal</option>
-                                            </select>
+                                            </select> -->
                                         </div>
                                        
                                     </div>
@@ -333,9 +333,10 @@
                 email: $("#email").val(),
                 subject: $("#subject").val(),
                 message: $("#message").val(),
+                contact: true
             }
             $.ajax({
-                url : "./Controller/requestHandler.php",
+                url : "./mailer.php",
                 method : "post",
                 data: data,
                 success: (res) => {

