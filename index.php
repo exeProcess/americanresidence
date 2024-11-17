@@ -133,11 +133,11 @@
 <body>
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
-        <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 
             </div>
-        </div> -->
+        </div>
         <!-- Spinner End -->
 
 
@@ -754,50 +754,7 @@ United States</p>
         </div>
         <!-- Footer End -->
 
-        <div class="login-modal" id="loginModal">
-        <!-- Modal Content -->
-        <div class="modal-login-content">
-            <!-- Preloader -->
-            <div class="login-preloader" id="loginPreloader"></div>
-            
-            <!-- Login Form Content -->
-            <div class="login-form" id="loginForm">
-            <h2>Login</h2>
-            <input type="text" placeholder="Email" id="login-email" required>
-            <br><br>
-            <input type="password" placeholder="Password" id="login-password" required>
-            <br><br>
-            <button class="login-btn" onclick="login()">Login</button>
-            <button class="close-btn" onclick="closeModal()">Close</button>
-            </div>
-        </div>
-        </div>
-        <!-- Back to Top -->
-        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-    </div>
-
-    <!-- Sign Up Modal -->
-    <div class="signup-modal" id="signUpModal">
-    <!-- Modal Content -->
-    <div class="modal-signup-content">
-        <!-- Preloader -->
-        <div class="signup-preloader" id="signup-preloader"></div>
-        
-        <!-- Sign Up Form Content -->
-        <div class="sign-up-form" id="signUpForm">
-        <h2>Sign Up</h2>
-        <!-- <input type="text" placeholder="Username" id="username" required>
-        <br><br> -->
-        <input type="email" placeholder="Email" id="email" required>
-        <br>
-        <input type="password" placeholder="Password" id="password" required>
-        <br>
-        <input type="password" placeholder="Confirm Password" id="confirmPassword" required>
-        <br>
-        <button class="sign-up-btn" onclick="signUp()">Sign Up</button>
-        <button class="close-btn" onclick="closeSignUpModal()">Close</button>
-        </div>
-    </div>
+    
     </div>
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -809,43 +766,6 @@ United States</p>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
-    <script>
-        function openSignUpModal() {
-            document.getElementById("signUpModal").style.display = "flex"; // Show the modal
-            setTimeout(() => {
-            document.getElementById("signup-preloader").style.display = "none"; // Hide preloader
-            document.getElementById("signUpForm").style.display = "block"; // Show sign-up form
-            }, 2000); // Delay of 2 seconds for preloader
-        }
-
-        // function closeSignUpModal() {
-        //     document.getElementById("signUpModal").style.display = "none";
-        //     document.getElementById("login-preloader").style.display = "flex";
-        //     document.getElementById("signUpForm").style.display = "none";
-        // }
-
-        // function signUp() {
-        //     // Your sign-up logic here
-        //     alert("Sign Up button clicked");
-        // }
-        function openLoginModal() {
-            // id.preventDeafualt()
-            document.getElementById("loginModal").style.display = "flex"; // Show the modal
-            setTimeout(() => {
-            document.getElementById("loginPreloader").style.display = "none"; // Hide preloader
-            document.getElementById("loginForm").style.display = "block"; // Show login form
-            }, 4000); // Delay of 2 seconds for preloaderaawqwa
-        }
-
-        function closeModal() {
-            document.getElementById("loginModal").style.display = "none";
-            document.getElementById("preloader").style.display = "flex";
-            document.getElementById("loginForm").style.display = "none";
-        }
-
-        
-        
-    </script>
 </body>
 
 </html>
