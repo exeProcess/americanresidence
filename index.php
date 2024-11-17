@@ -133,11 +133,11 @@
 <body>
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                
-            </div>
-        </div>
+        <div id="spinner" class="position-fixed w-100 vh-100 top-0 start-0 bg-white d-flex justify-content-center align-items-center">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
         <!-- Spinner End -->
 
 
@@ -766,6 +766,17 @@ United States</p>
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const preloader = document.getElementById("spinner");
+            if (preloader) {
+                preloader.style.opacity = 0; // Fade out
+                setTimeout(() => {
+                    preloader.style.display = "none"; // Remove from view
+                }, 500); // Allow some time for the fade-out
+            }
+        });
+    </script>
 </body>
 
 </html>

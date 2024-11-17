@@ -432,7 +432,13 @@ icons.forEach(icon => {
         }
 
         if($("#plan").val() == "full"){
-            window.location.href = "buy.php?id=<?=$id?>"
+            var params = {
+                id: '<?=$id?>',
+                amount: <?=$data['final_price']?>
+            };
+
+            let uri = 'buy.php?' + $.param(params);
+            window.location.href = uri
         }
     })
     </script>
