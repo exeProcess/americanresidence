@@ -232,7 +232,7 @@
         $db = $dbh->connect();
         $ctrl = new Controller($db);
 	
-        // $userName = $_POST['username'];
+        $userName = $_POST['username'];
         $email = $_POST['email'];
         $pword = $_POST['password'];
         $rPword = $_POST['rePassword'];
@@ -241,7 +241,7 @@
         if($pword == $rPword)
         {
             $fields = [
-                // 'username'=>$userName,
+                'username'=>$userName,
                 'email'=>$email,
                 'password'=>password_hash($pword,PASSWORD_DEFAULT)
             ];

@@ -438,7 +438,6 @@ include_once "Database.php";
                     "text" => "User with this email already exist"
                 ];
                 echo json_encode($response);
-                return;
             }else
             {
                 $sequel = "INSERT INTO 
@@ -454,7 +453,7 @@ include_once "Database.php";
                 $exec = $stmt->execute();
                 if($exec)
                 {
-                    // header('Location: ../../../index.php');
+                    
                     $response = [
                         "status" => 200,
                         "text" => "success"

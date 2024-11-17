@@ -207,12 +207,13 @@
                                     <h6> Available Payment Plans</h6>
                                 </div>
                             </div>
+                            <input type="hidden" name="plan" id="plan">
                             <div class="d-flex flex-column"> 
                                 <label class="radio"> 
                                     <div class="d-flex justify-content-between"> 
                                         <span>Custom Payment Plan</span>
                                         
-                                        <i class="fa fa-plus-circle icon" id="icon1"></i>
+                                        <i class="fa fa-plus-circle icon" data-toggle="modal" data-target="#paymentModal" id="icon1"></i>
                                     </div>
                                 </label>
                                 <br> 
@@ -226,12 +227,12 @@
                                 <label class="radio"> 
                                     <div class="d-flex justify-content-between"> 
                                         <span>Lump Sum Payment Plan</span> 
-                                        <span><i class="fa fa-plus-circle icon" id="icon1"></i></span> 
+                                        <span><i class="fa fa-plus-circle icon" id="icon2"></i></span> 
                                     </div>
                                 </label>  
                             </div>
                             <div class="buttons my-4"> 
-                                <a href="buy.php?id=<?= $id?>" class="btn btn-success btn-block">Proceed</a> 
+                                <button class="btn btn-success btn-block" id="proceed" disabled>Proceed</button> 
                             </div>
 
 
@@ -246,6 +247,61 @@
         </div>
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="paymentModalLabel">Payment Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5 class="mb-0 text-success">$85.00</h5>
+                    <h5 class="mb-3">Diabetes Pump & Supplies</h5>
+                    <div class="about">
+                        <div class="d-flex justify-content-between">
+                            <div class="d-flex flex-row mt-1">
+                                <h6>Insurance Responsibility</h6>
+                                <h6 class="text-success font-weight-bold ml-1">$71.76</h6>
+                            </div>
+                            <div class="d-flex flex-row align-items-center com-color">
+                                <i class="fa fa-plus-circle"></i> <span class="ml-1">Add Insurer card</span> 
+                            </div>
+                        </div>
+                        <p>Insurance claim and all necessary dependencies will be submitted to your insurer for the covered portion of this order.</p>
+                        <div class="p-2 d-flex justify-content-between bg-pay align-items-center"> 
+                            <span>Aetna - Open Access</span> <span>OAP</span> 
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row mt-1">
+                                <h6>Patient Balance</h6>
+                                <h6 class="text-success font-weight-bold ml-1">$13.24</h6>
+                            </div>
+                            <div class="d-flex flex-row align-items-center com-color"> 
+                                <i class="fa fa-plus-circle"></i> <span class="ml-1">Add Payment card</span> 
+                            </div>
+                        </div>
+                        <p>Insurance claim and all necessary dependencies will be submitted to your insurer for the covered portion of this order.</p>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">$</span>
+                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <span class="input-group-text">.00</span>
+                        </div>
+                        <div class="buttons">
+                            <a href="cc/index.html" class="btn btn-success btn-block">Proceed to payment</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <!-- You can add another button here if needed -->
+                </div>
+            </div>
+        </div>
+    </div>
 <!-- Category End -->
 
         <!-- Footer Start -->
@@ -349,12 +405,36 @@
 icons.forEach(icon => {
     icon.addEventListener('click', () => {
         // Remove 'selected' class from all icons
-        icons.forEach(i => i.classList.remove('selected'));
+        icons.forEach((i) => {
+            i.classList.remove('selected')
+            // console.log(i);
+            
+        });
         
         // Add 'selected' class to the clicked icon
         icon.classList.add('selected');
+        if(icon.id == "icon1"){
+            $("#plan").val("custom")
+            // console.log($("#plan").val());
+        }
+        if(icon.id == "icon2"){
+            $("#plan").val("full")
+        }
+        $("#proceed").prop("disabled", false)
+    
     });
+
 });
+
+    $("#proceed").click(() => {
+        if($("#plan").val() == "custom"){
+            window.location.href = "checkout.php?id=<?=$id?>"
+        }
+
+        if($("#plan").val() == "full"){
+            window.location.href = "buy.php?id=<?=$id?>"
+        }
+    })
     </script>
 </body>
 

@@ -158,25 +158,31 @@
                         <a href="index.php" class="nav-item nav-link active">Home</a>
                         <a href="about.php" class="nav-item nav-link">About</a>
                         <a href="property-list.php" class="nav-item nav-link">Property List</a>
-                        
-                            <!-- <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Log in</a>
-                                <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="#" onclick="openSignUpModal()" class="dropdown-item">Sign Up</a>
-                                    <hr>
-                                    <a href="#" id="login" onclick="openLoginModal()" class="dropdown-item">Log in</a>
-                                </div>
-                            </div> -->
-                        
-                            <!-- <div class="nav-item dropdown"> -->
-                                <!-- <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Log in</a> -->
-                                <!-- <a href="#"><i class="nav-link dropdown-toggle fas fa-user-circle" data-bs-toggle="dropdown"></i></a> -->
-                                <!-- <div class="dropdown-menu rounded-0 m-0">
-                                    <a href="application.php" class="dropdown-item">Application</a>
-                                    <a href="renewal.php" class="dropdown-item">Renewal</a>
-                                    <a href="404.html" class="dropdown-item">Make payment</a>
-                                    <!-- <a href="#" onclick="openSignUpModal()" class="dropdown-item">Sign Up</a> -->
-                              
+                        <?php if (!isset($_SESSION['user'])): ?>
+    <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            Log in
+        </a>
+        <div class="dropdown-menu rounded-0 m-0" aria-labelledby="loginDropdown">
+            <a href="admin/pages/form/register.php" class="dropdown-item">Sign Up</a>
+            <hr>
+            <a href="admin/pages/form/login.php" id="login" class="dropdown-item">Log in</a>
+        </div>
+    </div>
+<?php else: ?>
+    <!-- If the user is logged in, display user-specific options -->
+    <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fas fa-user-circle"></i>
+        </a>
+        <div class="dropdown-menu rounded-0 m-0" aria-labelledby="userDropdown">
+            <!-- <a href="renewal.php" class="dropdown-item">Renewal</a> -->
+            <a href="404.html" class="dropdown-item">Make payment</a>
+            <!-- Optionally, you can include a logout link here -->
+            <a href="logout.php" class="dropdown-item">Log out</a>
+        </div>
+    </div>
+<?php endif; ?>
                         <a href="contact.php" class="nav-item nav-link">Contact</a>
                         
                     </div>
@@ -837,38 +843,8 @@ United States</p>
             document.getElementById("loginForm").style.display = "none";
         }
 
-        function login() {
-            let data = {
-                password: $("#login-password").val(),
-                email: $("#login-email").val(),
-                login: true
-            }
-            $.ajax({
-                url: "Controller/requestHandler.php",
-                method: "POST",
-                data: data,
-                success: (res) => {
-                    console.log(res);
-                }
-            })
-        }
-        function signUp(){
-            let data = {
-                // username: $("#username").val(),
-                email: $("#email").val(),
-                password: $("#password").val(),
-                rePassword: $("#confirmPassword").val(),
-                signUp: true
-            }
-            $.ajax({
-                url: "Controller/requestHandler.php",
-                method: "POST",
-                data: data,
-                success: (res) => {
-                    console.log(res);
-                }
-            })
-        }
+        
+        
     </script>
 </body>
 

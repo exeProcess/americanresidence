@@ -7,6 +7,7 @@
         $db = $dbh->connect();
         $ctrl = new Controller($db);
         $id = $_GET['id'];
+        $amount_to_pay = $_GET['amount'];
         $data = $ctrl->select_this($id, "properties");
     }else{
       header("404.html");
@@ -108,6 +109,10 @@
               <tr>
                 <td>Discount</td>
                 <td class="price">0.00 USD</td>
+              </tr>
+              <tr>
+                <td>Amount to pay</td>
+                <td class="price"><?= $amount_to_pay. " USD"?></td>
               </tr>
               <tr>
                 <td>Subtotal</td>

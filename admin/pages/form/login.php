@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Muslims Ummah Admin | Log in</title>
+  <title>American Residence | Log in</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -20,14 +20,14 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#">Muslims Ummah Foundation</a>
+    <a href="#">American Residence</a>
   </div>
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <form action="../../index3.html" method="post">
+      <form>
         <div class="input-group mb-3">
           <input type="email" class="form-control" placeholder="Email" id="email">
           <div class="input-group-append">
@@ -95,42 +95,38 @@
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <script>
-  $("#login").click((e) => {
+  
+        $("#login").click((e) => {
     e.preventDefault()
     $("#login").html('<i class="fa fa-sync fa-spin">')
     // $("#loader").removeClass("d-none").addClass("d-block")
     let data = {
-      email: $("#email").val(),
-      password: $("#password").val(),
-      login: true
-    }
-    if(data.email == " " || data.password == ""){
-      $("#login").html('Signin')
-      toastr.error("All feilds are required")
-      return;
-    }
-    $.ajax({
-      url: '../../../Controller/requestHandler.php',
-      method: 'POST',
-      data: data,
-      success: (res) => {
-        let result = JSON.parse(res)
-        if(result.status == 200){
-          toastr.success('Successful login')
-          setTimeout(() => {
-            $("#login").html('Signin')
-          }, 10);
-          location.href = "../../index.php"
-        }else{
-          $("#login").html('Signin')
-          toastr.error(result.text)
-        }
-        // console.log(res);
-        
-      }
-    })
-    
+                password: $("#password").val(),
+                email: $("#email").val(),
+                login: true
+            }
+            $.ajax({
+                url: "../../../Controller/requestHandler.php",
+                method: "POST",
+                data: data,
+                success: (res) => {
+                  let result = JSON.parse(res)
+                  if(result.status == 200){
+                    toastr.success('Successful login')
+                    setTimeout(() => {
+                      $("#login").html('Sign in')
+                    }, 10);
+                    location.href = "../../../index.php"
+                  }else{
+                    $("#login").html('Signin')
+                    toastr.error(result.text)
+                  }
+                  // console.log(res);
+                  
+                }
+            })
   })
+  
 </script>
 </body>
 </html>

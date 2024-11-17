@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Muslims Ummah Admin | Registration Page</title>
+  <title>American Residence | Registration Page</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -19,16 +19,16 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="#">Muslims Ummah Foundation</a>
+    <a href="#">American Residence</a>
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new Admin</p>
 
-      <form action="../../index.html" method="post">
+      <form>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" value="Al Ummah" id="username">
+          <input type="text" class="form-control" placeholder="Full Name" id="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -73,7 +73,7 @@
             <button type="submit" class="btn btn-primary btn-block" id="signup">Register</button>
           </div> -->
           <div class="col-12 tab-loading">
-          <button type="submit" class="btn btn-primary btn-block" id="signup">Register</button>
+          <button type="submit" class="btn btn-primary btn-block" id="signup" onclick="signUp()">Register</button>
           </div>
           <!-- /.col -->
         </div>
@@ -107,49 +107,39 @@
 <!-- AdminLTE App -->
 <script src="../../dist/js/adminlte.min.js"></script>
 <script>
+  function signUp(){
+            
+        }
   $("#signup").click((e) => {
     e.preventDefault()
     $("#signup").html('<i class="fa fa-sync fa-spin">')
     let data = {
-      username: $("#username").val(),
-      email: $("#email").val(),
-      password: $("#password").val(),
-      rePassword: $("#rePassword").val(),
-      signup: true
-    }
-    if(data.username == " " || data.email == " " || data.password == "" || data.rePassword == " "){
-      
-      toastr.error("All feilds are required")
-      setTimeout(() => {
-        $("#signup").html('Register')
-      }, 500);
-      return;
-    }
-    setTimeout(() => {
-      $.ajax({
+                username: $("#username").val(),
+                email: $("#email").val(),
+                password: $("#password").val(),
+                rePassword: $("#rePassword").val(),
+                signUp: true
+            }
+            $.ajax({
+                url: "../../../Controller/requestHandler.php",
+                method: "POST",
+                data: data,
+                success: (res) => {
+                    let result = JSON.parse(res)
+                    if(result.status == 500){
+                      console.log(result);
+                      
+                    }else{
+                      let logindata = {
+                email: $("#email").val(),
+                password: $("#password").val(),
+                login: true
+            }
+                      // window.location.href = "../../../index.php"
+                      $.ajax({
       url: '../../../Controller/requestHandler.php',
       method: 'POST',
-      data: data,
-      success: (res) => {
-        let result = JSON.parse(res)
-        if(result.status == 200){
-          // toastr.success('Successful login')
-          // $("#signup").html('Register')
-          // location.href = "../../index.php"
-          let data = {
-      email: $("#email").val(),
-      password: $("#password").val(),
-      login: true
-    }
-    if(data.email == " " || data.password == ""){
-      $("#login").html('Signin')
-      toastr.error("All feilds are required")
-      return;
-    }
-    $.ajax({
-      url: '../../../Controller/requestHandler.php',
-      method: 'POST',
-      data: data,
+      data: logindata,
       success: (res) => {
         let result = JSON.parse(res)
         if(result.status == 200){
@@ -157,7 +147,7 @@
           setTimeout(() => {
             $("#login").html('Signin')
           }, 10);
-          location.href = "../../index.php"
+          location.href = "../../../index.php"
         }else{
           $("#login").html('Signin')
           toastr.error(result.text)
@@ -166,17 +156,9 @@
         
       }
     })
-         
-        }
-        if(result.status == 500){
-          
-          toastr.error(result.text)
-          $("#signup").html('Register')
-        }
-        
-      }
-    })
-    }, 100);
+                    }
+                }
+            })
     
   })
 </script>
