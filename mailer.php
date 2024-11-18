@@ -42,14 +42,14 @@ function sendEmail($post) {
         $mail->isSMTP();  // Set mailer to use SMTP
         $mail->Host       = 'smtp.gmail.com';  // Specify Gmail's SMTP server
         $mail->SMTPAuth   = true;  // Enable SMTP authentication
-        $mail->Username   = 'habeebajani9@gmail.com';   // Your Gmail address
-        $mail->Password   = 'ugdl yjwx ibao golx';  // Your Gmail password or app-specific password
+        $mail->Username   = 'americanresidence435@gmail.com';   // Your Gmail address
+        $mail->Password   = 'dtwh cnul jqfq uxol';  // Your Gmail password or app-specific password
         $mail->SMTPSecure = 'ssl';  // Enable TLS encryption
         $mail->Port       = 465;  // TCP port to connect to Gmail's SMTP
 
         //Recipients
-        $mail->setFrom('habeebajani9@gmail.com', 'Habeeb');  // From email address and name
-        $mail->addAddress("habeebajani9@gmail.com", "Habeeb");  // Recipient email address
+        $mail->setFrom('americanresidence435@gmail.com', 'Resido');  // From email address and name
+        $mail->addAddress("americanresidence435@gmail.com", "Resido");  // Recipient email address
 
         // Content
         $mail->isHTML(true);  // Set email format to HTML
@@ -91,15 +91,14 @@ function sendContact($post) {
         $mail->SMTPDebug = 0;  // Disable verbose debug output
         $mail->isSMTP();  // Set mailer to use SMTP
         $mail->Host       = 'smtp.gmail.com';  // Specify Gmail's SMTP server
-        $mail->SMTPAuth   = true;  // Enable SMTP authentication
-        $mail->Username   = 'habeebajani9@gmail.com';   // Your Gmail address
-        $mail->Password   = 'ugdl yjwx ibao golx';  // Your Gmail password or app-specific password
+        $mail->Username   = "americanresidence435@gmail.com";   // Your Gmail address
+        $mail->Password   = 'dtwh cnul jqfq uxol';  // Your Gmail password or app-specific password // Your Gmail password or app-specific password
         $mail->SMTPSecure = 'ssl';  // Enable TLS encryption
         $mail->Port       = 465;  // TCP port to connect to Gmail's SMTP
 
         //Recipients
-        $mail->setFrom('habeebajani9@gmail.com', 'Habeeb');  // From email address and name
-        $mail->addAddress("habeebajani9@gmail.com", "Habeeb");  // Recipient email address
+        $mail->setFrom('americanresidence435@gmail.com', 'Resido');  // From email address and name
+        $mail->addAddress("americanresidence435@gmail.com");  // Recipient email address
 
         // Content
         $mail->isHTML(true);  // Set email format to HTML
@@ -136,14 +135,14 @@ function sendOTP($post) {
         $mail->isSMTP();  // Set mailer to use SMTP
         $mail->Host       = 'smtp.gmail.com';  // Specify Gmail's SMTP server
         $mail->SMTPAuth   = true;  // Enable SMTP authentication
-        $mail->Username   = 'habeebajani9@gmail.com';   // Your Gmail address
-        $mail->Password   = 'ugdl yjwx ibao golx';  // Your Gmail password or app-specific password
+        $mail->Username   = "americanresidence435@gmail.com";   // Your Gmail address
+        $mail->Password   = 'dtwh cnul jqfq uxol';  // Your Gmail password or app-specific password
         $mail->SMTPSecure = 'ssl';  // Enable TLS encryption
         $mail->Port       = 465;  // TCP port to connect to Gmail's SMTP
 
         //Recipients
-        $mail->setFrom('habeebajani9@gmail.com', 'Habeeb');  // From email address and name
-        $mail->addAddress("habeebajani9@gmail.com", "Habeeb");  // Recipient email address
+        $mail->setFrom('americanresidence435@gmail.com', 'Resido');  // From email address and name
+        $mail->addAddress("americanresidence435@gmail.com");  // Recipient email address
 
         // Content
         $mail->isHTML(true);  // Set email format to HTML

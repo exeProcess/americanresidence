@@ -252,13 +252,13 @@
         console.log(data);
         
         $.ajax({
-          url: "mailer.php",
+          url: "./mailer.php",
           method: "POST",
           data: data,
           success: (res) => {
             if(res == "success"){
                   
-                window.location.href = "verify.html"
+                window.location.href = "verify.php"
             
             }
             // setTimeout(function() {
