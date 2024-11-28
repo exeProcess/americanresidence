@@ -1,9 +1,6 @@
 <?php
   include_once "./Controller/Controller.class.php";
   include_once "./Controller/Database.php";
-  $dbh = new Database;
-  $db = $dbh->connect();
-  $ctrl = new Controller($db);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -130,6 +127,11 @@
 </head>
 
 <body>
+    <?php
+        $dbh = new Database;
+        $db = $dbh->connect();
+        $ctrl = new Controller($db);
+    ?>
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
         <div id="spinner" class="position-fixed w-100 vh-100 top-0 start-0 bg-white d-flex justify-content-center align-items-center">
