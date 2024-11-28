@@ -1,6 +1,6 @@
 <?php
-  include_once "Controller/Controller.class.php";
-  include_once "Controller/Database.php";
+  include_once "./Controller/Controller.class.php";
+  include_once "./Controller/Database.php";
   $dbh = new Database;
   $db = $dbh->connect();
   $ctrl = new Controller($db);
@@ -12,8 +12,7 @@
     <meta charset="utf-8">
     <title>America Residence</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="" name="keywords">
-    <meta content="" name="description">
+    
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
@@ -31,10 +30,10 @@
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="./css/style.css" rel="stylesheet">
     <style>
          /* Modal content box styling */
     .modal-login-content {
