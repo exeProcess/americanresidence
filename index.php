@@ -1,9 +1,24 @@
 <?php
-  include_once "./Controller/Controller.class.php";
-  include_once "./Controller/Database.php";
-  $dbh = new Database;
-  $db = $dbh->connect();
-  $ctrl = new Controller($db);
+// Autoload classes for better scalability and reduced manual includes
+spl_autoload_register(function ($className) {
+    $filePath = __DIR__ . "/Controller/{$className}.php";
+    if (file_exists($filePath)) {
+        include_once $filePath;
+    }
+});
+
+try {
+    // Initialize Database connection
+    $dbh = new Database();
+    $db = $dbh->connect();
+
+    // Initialize Controller
+    $ctrl = new Controller($db);
+} catch (Exception $e) {
+    // Handle potential exceptions gracefully
+    error_log($e->getMessage());
+    die("An error occurred. Please try again later.");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
