@@ -6,7 +6,7 @@
     // define('USER','root');
     // define('KEY', '');
     // define('DB', 'american_residence');
-    define('PROPERTIES_TABLE','properties');
+    // define('PROPERTIES_TABLE','properties');
     // define('DONATION_TABLE','donation');
     // define('INBOX_TABLE','inbox');
     // define('OUTBOX_TABLE','outbox');
