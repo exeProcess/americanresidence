@@ -188,7 +188,12 @@
         $id = $_POST['id'];
         $ctrl->delete_this($id, $table);
     }
-
+    if(isset($_GET['property_type'])){
+        $dbClass = new Database();
+        $db = $dbClass->connect();
+        $ctrl = new Controller($db);
+        $ctrl->select("property_type");
+    }
     if(isset($_POST['sendmail'])){
         $dbClass = new Database();
         $db = $dbClass->connect();
