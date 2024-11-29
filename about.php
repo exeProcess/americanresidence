@@ -1,3 +1,10 @@
+<?php
+  include_once "./Controller/Controller.class.php";
+  include_once "./Controller/Database.php";
+  $dbh = new Database;
+  $db = $dbh->connect();
+  $ctrl = new Controller($db);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
