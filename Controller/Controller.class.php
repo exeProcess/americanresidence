@@ -13,7 +13,7 @@ include_once "Database.php";
 
     class Controller
     {
-        private $productTable = PROPERTIES_TABLE;
+        // private $productTable = PROPERTIES_TABLE;
         // private $donationTable = DONATION_TABLE;
         // private $inboxTable = INBOX_TABLE;
         // private $outboxTable = OUTBOX_TABLE;
@@ -232,8 +232,9 @@ include_once "Database.php";
                     header('Location: pages/data-tables.php');
                 }
         }
-        public function selectAll($table)
+        public function selectAllProperty()
         {
+            $table = 'properties';
             $select_query = "SELECT 
                             * 
                         FROM 
@@ -242,6 +243,19 @@ include_once "Database.php";
             $data = $stmt->fetchAll();
             return $data;
         }
+        public function selectAllPropertyType()
+        {
+            $table = 'property_type';
+            
+            $select_query = "SELECT 
+                            * 
+                        FROM 
+                            $table";
+            $stmt = $this->connection->query($select_query);
+            $data = $stmt->fetchAll();
+            return $data;
+        }
+
        
         public function select_this($id, $table)
         {

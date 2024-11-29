@@ -225,7 +225,7 @@
                             </div>
                             <div class="col-md-4">
                                 <?php
-                                    $property_type = $ctrl->selectAll("property_type");
+                                    $property_type = $ctrl->selectAllPropertyType();
                                 ?>
                                 <select class="form-select border-0 py-3">
                                     <?php 
@@ -361,7 +361,7 @@
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
                             <?php
-                                $properties = $ctrl->select(6);
+                                $properties = $ctrl->selectAllProperty();
                                 foreach($properties as $property):
                             ?>
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
