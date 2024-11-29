@@ -49,7 +49,7 @@
                     <div class="icon p-2 me-2">
                         <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
                     </div>
-                    <h1 class="m-0 text-primary">Makaan</h1>
+                    <!-- <h1 class="m-0 text-primary">Makaan</h1> -->
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
@@ -81,9 +81,8 @@
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
                     <h1 class="display-5 animated fadeIn mb-4">Find A <span class="text-primary">Perfect Home</span> To Live With Your Family</h1>
-                    <p class="animated fadeIn mb-4 pb-2">Vero elitr justo clita lorem. Ipsum dolor at sed stet
-                        sit diam no. Kasd rebum ipsum et diam justo clita et kasd rebum sea elitr.</p>
-                    <a href="" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Get Started</a>
+                    <p class="animated fadeIn mb-4 pb-2">Find Your Perfect Home with Ease. Browse our curated selection of properties, from cozy apartments to luxurious estates, and start your journey today. Whether you're buying, selling, or renting, we're here to guide you every step of the way.</p>
+                    <a href="contact.php#contact-form" class="btn btn-primary py-3 px-5 me-3 animated fadeIn">Discuss your plan</a>
                 </div>
                 <div class="col-md-6 animated fadeIn">
                     <div class="owl-carousel header-carousel">
@@ -143,7 +142,7 @@
                     <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
                 </div>
                 <div class="row g-4">
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                         <a class="cat-item d-block bg-light text-center rounded p-3" href="">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
@@ -154,7 +153,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.3s">
                         <a class="cat-item d-block bg-light text-center rounded p-3" href="">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
@@ -165,7 +164,7 @@
                             </div>
                         </a>
                     </div>
-                    <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.5s">
                         <a class="cat-item d-block bg-light text-center rounded p-3" href="">
                             <div class="rounded p-4">
                                 <div class="icon mb-3">
@@ -248,11 +247,10 @@
                     </div>
                     <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                         <h1 class="mb-4">#1 Place To Find The Perfect Property</h1>
-                        <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                        <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
-                        <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+                        <p class="mb-4">Discover Your Dream Home Today. Explore a wide range of properties that fit your lifestyle and budget. With expert guidance and seamless service, finding your ideal space has never been easier. Start your journey with us now.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Market Analysis and Investment Guidance</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Property Management</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Buying & selling of properties</p>
                     </div>
                 </div>
             </div>
@@ -306,7 +304,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                            <!-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
                                         <a href=""><img class="img-fluid" src="img/property-2.jpg" alt=""></a>
@@ -526,8 +524,8 @@
                                 <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
                             </div>
                         </div>
-                    </div>
-                    <div id="tab-3" class="tab-pane fade show p-0">
+                    </div> -->
+                    <!-- <div id="tab-3" class="tab-pane fade show p-0">
                         <div class="row g-4">
                             <div class="col-lg-4 col-md-6">
                                 <div class="property-item rounded overflow-hidden">
@@ -642,7 +640,7 @@
                                         <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="col-12 text-center">
                                 <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
                             </div>
@@ -666,10 +664,10 @@
                             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                                 <div class="mb-4">
                                     <h1 class="mb-3">Contact With Our Certified Agent</h1>
-                                    <p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p>
+                                    <p>Ready to take the next step? Our certified agents are here to provide expert advice and guide you through every part of your real estate journey. Reach out today for personalized support!</p>
                                 </div>
-                                <a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Make A Call</a>
-                                <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a>
+                                <a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-calendar-alt me-2"></i>Contact an agent</a>
+                                <!-- <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a> -->
                             </div>
                         </div>
                     </div>
@@ -684,7 +682,7 @@
             <div class="container">
                 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                     <h1 class="mb-3">Property Agents</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                    <p>Our expert property agents are dedicated to helping you find the perfect home or investment. With local market knowledge and a client-first approach, they’ll ensure a smooth and successful experience from start to finish.</p>
                 </div>
                 <div class="row g-4">
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -698,8 +696,8 @@
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
+                                <h5 class="fw-bold mb-0">Olivia Grace Peterson</h5>
+                                <small>CRS</small>
                             </div>
                         </div>
                     </div>
@@ -714,8 +712,8 @@
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
+                                <h5 class="fw-bold mb-0">William Charles Anderson</h5>
+                                <small>CCIM</small>
                             </div>
                         </div>
                     </div>
@@ -730,8 +728,8 @@
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
+                                <h5 class="fw-bold mb-0">Aaliyah Nicole Patel</h5>
+                                <small>Accredited Buyer’s Representative</small>
                             </div>
                         </div>
                     </div>
@@ -746,8 +744,8 @@
                                 </div>
                             </div>
                             <div class="text-center p-4 mt-3">
-                                <h5 class="fw-bold mb-0">Full Name</h5>
-                                <small>Designation</small>
+                                <h5 class="fw-bold mb-0">Benjamin Jacob Montgomery</h5>
+                                <small>Realtor</small>
                             </div>
                         </div>
                     </div>
@@ -762,41 +760,41 @@
             <div class="container">
                 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                     <h1 class="mb-3">Our Clients Say!</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                    <p>Hear from our happy clients! Discover how we’ve helped people find their dream homes, make smart investments, and navigate the real estate market with confidence. Your satisfaction is our top priority.</p>
                 </div>
                 <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                     <div class="testimonial-item bg-light rounded p-3">
                         <div class="bg-white border rounded p-4">
-                            <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                            <p>I had an amazing experience working with this team! They listened to my needs and found me the perfect home within my budget. The entire process was smooth, and they made sure I felt confident every step of the way. Highly recommend!</p>
                             <div class="d-flex align-items-center">
                                 <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 45px; height: 45px;">
                                 <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Client Name</h6>
-                                    <small>Profession</small>
+                                    <h6 class="fw-bold mb-1">Emily R</h6>
+                                    <small>Corporate Executive</small>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-item bg-light rounded p-3">
                         <div class="bg-white border rounded p-4">
-                            <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                            <p>As a first-time homebuyer, I was nervous, but my agent was incredibly knowledgeable and patient. They explained everything in detail, and I never felt pressured. I’m so happy with my new place and grateful for their support!</p>
                             <div class="d-flex align-items-center">
                                 <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg" style="width: 45px; height: 45px;">
                                 <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Client Name</h6>
-                                    <small>Profession</small>
+                                    <h6 class="fw-bold mb-1">James T</h6>
+                                    <small>Medical Specialist</small>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-item bg-light rounded p-3">
                         <div class="bg-white border rounded p-4">
-                            <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                            <p>Selling my home was stress-free thanks to this team. They provided expert advice on pricing and staging, and I got multiple offers within days. Their professionalism and market insight made all the difference.</p>
                             <div class="d-flex align-items-center">
                                 <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-3.jpg" style="width: 45px; height: 45px;">
                                 <div class="ps-3">
-                                    <h6 class="fw-bold mb-1">Client Name</h6>
-                                    <small>Profession</small>
+                                    <h6 class="fw-bold mb-1">David L</h6>
+                                    <small> Entrepreneur</small>
                                 </div>
                             </div>
                         </div>
