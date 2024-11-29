@@ -182,10 +182,9 @@
         </div>
     </div>
 <?php endif; ?>
-                        <a href="contact.php" class="nav-item nav-link">Contact</a>
                         
                     </div>
-                    <!-- <a href="" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a> -->
+                    <a href="contact.php" class="nav-item nav-link">Contact</a>
                 </div>
             </nav>
         </div>
