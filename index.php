@@ -284,7 +284,7 @@
                 </div>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-4">
+                        <div class="row g-4" id="property-listings">
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
@@ -906,13 +906,16 @@
     <script>
     (function () {
         // Fetch property types for the dropdown and properties for the listings
-        function fetchData(propertyTypeId = null) {
+        function fetchData() {
             $.ajax({
-                url: 'requestHandler.php', // Replace with your PHP endpoint
+                url: 'proptype.php', // Replace with your PHP endpoint
                 method: 'GET',
-                data: propertyTypeId ? { type: propertyTypeId } : {}, // Filter by type if provided
+                // data: propertyTypeId ? { type: propertyTypeId } : {}, // Filter by type if provided
                 dataType: 'json', // Assuming the response is JSON
                 success: function (response) {
+                    let res = JSON.parse(response)
+                    console.log(res);
+                    
                     // Populate the dropdown
                     populateDropdown(response.propertyTypes);
 
