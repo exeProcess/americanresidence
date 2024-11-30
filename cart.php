@@ -1,15 +1,42 @@
 <?php
-    include_once "Controller/Controller.class.php";
-    include_once "Controller/Database.php";
-    
-    if(isset($_GET['id'])){
-        $dbh = new Database;
-        $db = $dbh->connect();
-        $ctrl = new Controller($db);
-        $id = $_GET['id'];
-        $data = $ctrl->select_this($id, "properties");
+
+// Database connection details
+$host = "localhost";
+$username = "root";
+$password = "";
+$dbname = "american_residence"; // Replace with your database name
+
+// Establish the database connection
+try {
+    $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Connection failed: " . $e->getMessage()
+    ]);
+    exit;
+}
+
+// Check if 'id' is provided
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']); // Ensure the ID is an integer
+    $table = "properties"; // Replace with your table name
+    $data = [];
+    // Prepare and execute the SQL query
+    $query = "SELECT * FROM $table WHERE id = :id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Fetch the data
+    if ($stmt->rowCount() > 0) {
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+        
     }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 

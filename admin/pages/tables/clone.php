@@ -594,8 +594,9 @@ input[type=file]::file-selector-button:hover {
     // formdata.append('id',$("#edit-id").val());
     formdata.append('photo',file);
     formdata.append('post_product', true)
+    const requestHandlerUrl = "<?php echo $_SERVER['DOCUMENT_ROOT'] . '/Controller/requestHandler.php'; ?>";
     $.ajax({
-      url: '../../../Controller/requestHandler.php',
+      url: requestHandlerUrl,
       method: 'POST',
       data: formdata,
       cache : false,

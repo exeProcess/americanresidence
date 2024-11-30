@@ -285,7 +285,7 @@
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4" id="property-listings">
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <!-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
                                         <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a>
@@ -303,7 +303,7 @@
                                         <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
@@ -908,25 +908,25 @@
         // Fetch property types for the dropdown and properties for the listings
         function fetchData() {
             $.ajax({
-                url: 'proptype.php', // Replace with your PHP endpoint
+                url: 'fetchproduct.php', // Replace with your PHP endpoint
                 method: 'GET',
                 // data: propertyTypeId ? { type: propertyTypeId } : {}, // Filter by type if provided
                 dataType: 'json', // Assuming the response is JSON
                 success: function (response) {
-                    let res = JSON.parse(response)
-                    console.log(res);
+                    
+                    console.log(response.data);
                     
                     // Populate the dropdown
-                    populateDropdown(response.propertyTypes);
+                    // populateDropdown(response.propertyTypes);
 
                     // Populate the property listings
-                    populateListings(response.properties);
+                    populateListings(response.data);
                 },
-                error: function (xhr, status, error) {
-                    console.error("Error fetching data:", error);
-                    $('#property-type-select').empty().append('<option disabled>Error loading Property Types</option>');
-                    $('#property-listings').html('<p class="text-danger">Error loading properties.</p>');
-                }
+                // error: function (xhr, status, error) {
+                //     console.error("Error fetching data:", error);
+                //     $('#property-type-select').empty().append('<option disabled>Error loading Property Types</option>');
+                //     $('#property-listings').html('<p class="text-danger">Error loading properties.</p>');
+                // }
             });
         }
 
