@@ -386,17 +386,11 @@ input[type=file]::file-selector-button:hover {
                     
                     <div class="form-group">
                       <label>Property Type</label>
-                      <?php
-                        $property_type = $ctrl->selectAll("property_type");
-                      ?>
+                      
                       <select class="custom-select" id="prop-type">
-                        <?php 
-                          foreach ($property_type as $type):
-                        ?>
-                            <option value="<?=$type['prop_type']?>"><?=$type['prop_type']?></option>
-                        <?php
-                          endforeach;
-                        ?>
+                          <option value="apartment">Apartment</option>
+                          <option value="home">Home</option>
+                          <option value="villa">Villa</option>
                       </select>
                     </div>
                     <div class="form-group">
