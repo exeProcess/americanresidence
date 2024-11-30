@@ -5,9 +5,9 @@ header('Content-Type: application/json');
 
 // Database connection
 $host = 'localhost'; // Update with your database host
-$dbname = 'american_residence'; // Update with your database name
-$username = 'root'; // Update with your database username
-$password = ''; // Update with your database password
+$dbname = 'americar_reside'; // Update with your database name
+$username = 'americar_reside'; // Update with your database username
+$password = 'LPcLYu2hVFAcWHU834gr'; // Update with your database password
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
@@ -27,7 +27,7 @@ $propertyTypes = $propertyTypesStmt->fetchAll(PDO::FETCH_ASSOC);
 $propertiesQuery = "SELECT 
                         *
                     FROM properties";
-                    
+
 
 // Check if a property type filter is provided
 // $type = isset($_GET['prop_type']) ? intval($_GET['prop_type']) : null;
