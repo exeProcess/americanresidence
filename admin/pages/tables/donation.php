@@ -1,13 +1,4 @@
-<?php
-  include_once "../../../Controller/Controller.class.php";
-  include_once "../../../Controller/Database.php";
-  $dbh = new Database;
-  $db = $dbh->connect();
-  $ctrl = new Controller($db);
-  if(!$ctrl::is_logged_in()){
-    $ctrl::login_error_redirect("../form/login.php");
-  }
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
