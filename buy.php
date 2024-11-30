@@ -1,10 +1,10 @@
 <?php
 
 // Database connection details
-$host = "localhost";
-$username = "root";
-$password = "";
-$dbname = "american_residence"; // Replace with your database name
+$host = "localhost"; // Replace with your database host
+$username = "americar_reside"; // Replace with your database username
+$password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
+$dbname = "americar_reside"; // Replace with your database name
 
 // Establish the database connection
 try {
