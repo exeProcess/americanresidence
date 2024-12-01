@@ -45,7 +45,7 @@ function sendEmail($post) {
         $mail->Username   = 'americanresidence435@gmail.com';   // Your Gmail address
         $mail->Password   = 'dtwh cnul jqfq uxol';  // Your Gmail password or app-specific password
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  // Enable TLS encryption
-        $mail->Port       = 465;  // TCP port to connect to Gmail's SMTP
+        $mail->Port       = 587;  // TCP port to connect to Gmail's SMTP
 
         //Recipients
         $mail->setFrom('americanresidence435@gmail.com', 'Resido');  // From email address and name
