@@ -1,3 +1,8 @@
+<?php
+    include_once "Controller/Controller.class.php";
+    include_once "Controller/Database.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,13 +64,31 @@
                         <a href="index.php" class="nav-item nav-link active">Home</a>
                         <a href="about.php" class="nav-item nav-link">About</a>
                         <a href="property-list.php" class="nav-item nav-link">Property List</a>
+                        <?php if (!isset($_SESSION['user'])): ?>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Application</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="testimonial.php" class="dropdown-item">Renewal</a>
-                                <a href="404.html" class="dropdown-item">Make payment</a>
+                                <a href="#" class="nav-link dropdown-toggle" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Log in
+                                </a>
+                                <div class="dropdown-menu rounded-0 m-0" aria-labelledby="loginDropdown">
+                                    <a href="admin/pages/form/register.php" class="dropdown-item">Sign Up</a>
+                                    <hr>
+                                    <a href="admin/pages/form/login.php" id="login" class="dropdown-item">Log in</a>
+                                </div>
                             </div>
-                        </div>
+                            <?php else: ?>
+                                <!-- If the user is logged in, display user-specific options -->
+                                <div class="nav-item dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user-circle"></i>
+                                    </a>
+                                    <div class="dropdown-menu rounded-0 m-0" aria-labelledby="userDropdown">
+                                        <!-- <a href="renewal.php" class="dropdown-item">Renewal</a> -->
+                                        <a href="404.html" class="dropdown-item">Make payment</a>
+                                        <!-- Optionally, you can include a logout link here -->
+                                        <a href="logout.php" class="dropdown-item">Log out</a>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         <a href="contact.php" class="nav-item nav-link">Contact</a>
                         
                     </div>
@@ -666,7 +689,7 @@
                                     <h1 class="mb-3">Contact With Our Certified Agent</h1>
                                     <p>Ready to take the next step? Our certified agents are here to provide expert advice and guide you through every part of your real estate journey. Reach out today for personalized support!</p>
                                 </div>
-                                <a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-calendar-alt me-2"></i>Contact an agent</a>
+                                <a href="contact.php#contact-form" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-calendar-alt me-2"></i>Contact an agent</a>
                                 <!-- <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a> -->
                             </div>
                         </div>
