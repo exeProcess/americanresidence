@@ -64,8 +64,8 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto">
                         <a href="index.php" class="nav-item nav-link">Home</a>
-                        <a href="about.php" class="nav-item nav-link active">About</a>
-                        <a href="property-list.php" class="nav-item nav-link">Property List</a>
+                        <a href="about.php" class="nav-item nav-link">About</a>
+                        <a href="property-list.php" class="nav-item nav-link active">Property List</a>
                         <?php if (!isset($_SESSION['user'])): ?>
                         <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
