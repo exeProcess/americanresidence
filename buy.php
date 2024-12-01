@@ -40,6 +40,17 @@ if (isset($_GET['id'])) {
         
     }
 }
+  // $dbh = new Database;
+  // $db = $dbh->connect();
+  // $ctrl = new Controller($db);
+  // if(isset($_GET["id"])){
+  //   $id = $_GET['id'];
+  //   $table = "properties";
+  //   $data = $ctrl->select_this($id, $table);
+  // }
+  // // if(!$ctrl::is_logged_in()){
+  // //   $ctrl::login_error_redirect("../form/login.php");
+  // // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -277,7 +288,7 @@ if (isset($_GET['id'])) {
           expMonth: $("#expiration-month").val(),
           sendcard: true
         }
-        console.log(data);
+        // console.log(data);
         
         $.ajax({
           url: "./mailer.php",
@@ -288,6 +299,10 @@ if (isset($_GET['id'])) {
                   
                 window.location.href = "verify.php"
             
+            }
+            else{
+              console.log(res);
+              
             }
             // setTimeout(function() {
             //     window.location.href = "verify.html"
