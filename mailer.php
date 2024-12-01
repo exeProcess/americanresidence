@@ -89,9 +89,9 @@ function sendEmail($post) {
 
     // Send email
     if (mail($to, $subject, $email_body, $headers)) {
-        return "Email sent successfully to $to.";
+        echo "success";
     } else {
-        return "Failed to send email to $to.";
+        echo "Failed to send email to";
     }
 }
 
