@@ -1,7 +1,8 @@
 <?php
 // Load Composer's autoloader (if using Composer)
 // require '../vendor/autoload.php';
-// include_once "Session.php";
+include_once "config.php";
+include_once "Session.php";
 include_once "Database.php";
 
 // Import PHPMailer classes into the global namespace

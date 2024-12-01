@@ -5,6 +5,10 @@ $host = "localhost"; // Replace with your database host
 $username = "americar_reside"; // Replace with your database username
 $password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
 $dbname = "americar_reside"; // Replace with your database name
+// $host = "localhost"; // Replace with your database host
+// $username = "root"; // Replace with your database username
+// $password = ""; // Replace with your database password
+// $dbname = "american_residence"; // Replace with your database name
 
 // Establish the database connection
 try {
@@ -54,13 +58,13 @@ if (isset($_GET['id'])) {
     <title>Day 002 - Credit Card Checkout</title>
     <style>
         .left-side {
-          background: url(<?= $data['image']?>);
+          background: url("data:image/jpeg;base64,<?= $data['image']?>");
           background-position: center;
           background-size: cover;
           position: relative;
         }
         body {
-          background: url(<?= $data['image']?>);
+          background: url("data:image/jpeg;base64,<?= $data['image']?>"););
           background-position: center;
           background-size: cover;
           backdrop-filter: blur(8px);

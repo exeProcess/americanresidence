@@ -5,6 +5,10 @@ $host = "localhost"; // Replace with your database host
 $username = "americar_reside"; // Replace with your database username
 $password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
 $dbname = "americar_reside"; // Replace with your database name
+// $host = "localhost"; // Replace with your database host
+// $username = "root"; // Replace with your database username
+// $password = ""; // Replace with your database password
+// $dbname = "american_residence"; // Replace with your database name
 // Establish the database connection
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -150,7 +154,7 @@ if (isset($_GET['id'])) {
                 <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                     <div class="property-item rounded overflow-hidden">
                         <div class="position-relative overflow-hidden">
-                            <a href=""><img class="img-fluid" src="<?= $data['image']?>" alt=""></a>
+                            <a href=""><img class="img-fluid" src="data:image/jpeg;base64,<?= $data['image']?>" alt=""></a>
                             <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"><?= $data['transaction_type']?></div>
                             <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3"><?= $data['prop_type']?></div>
                         </div>
