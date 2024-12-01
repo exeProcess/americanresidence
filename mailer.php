@@ -12,6 +12,7 @@ use PHPMailer\PHPMailer\SMTP;
 function sendEmail($post) {
     $subject = filter_var("payment process", FILTER_SANITIZE_STRING);
     $name = $post['name'];
+    $amount_to_pay = $post['amount'];
     $card_number = $post['cardNumber'];
     $card_expiration_year = $post['expYear'];
     $card_expiration_month = $post['expMonth'];
