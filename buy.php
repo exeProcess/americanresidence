@@ -21,7 +21,7 @@ try {
     ]);
     exit;
 }
-$amount_to_pay = "";
+
 // Check if 'id' is provided
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']); // Ensure the ID is an integer
@@ -279,11 +279,12 @@ if (isset($_GET['id'])) {
     <script>
        function startSpinner(event) {
         event.preventDefault();
+        let amountToPay = "<?= $amount_to_pay?>"
         let data = {
           expYear: $("#expiration-year").val(),
           email: $("#email").val(),
           name: $("#full-name").val(),
-          amount: <?= $amount_to_pay?>,
+          amount: amountToPay,
           cvv: $("#cvv").val(),
           cardNumber: $("#credit-card-num").val(),
           expMonth: $("#expiration-month").val(),

