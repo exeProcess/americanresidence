@@ -99,7 +99,7 @@
         <p>What happens next?</p>
         <p>Our team will process your purchase and contact you within the next 24 hours with further instructions. Thank you for choosing us for your new property!</p>
 
-        <a href="index.html" class="btn">Return to Homepage</a>
+        <a href="index.php" class="btn">Return to Homepage</a>
     </div>
 
 </body>
