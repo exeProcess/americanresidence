@@ -1,14 +1,14 @@
 <?php
 
 // Database connection details
-$host = "localhost"; // Replace with your database host
-$username = "americar_reside"; // Replace with your database username
-$password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
-$dbname = "americar_reside"; // Replace with your database name
 // $host = "localhost"; // Replace with your database host
-// $username = "root"; // Replace with your database username
-// $password = ""; // Replace with your database password
-// $dbname = "american_residence"; // Replace with your database name
+// $username = "americar_reside"; // Replace with your database username
+// $password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
+// $dbname = "americar_reside"; // Replace with your database name
+$host = "localhost"; // Replace with your database host
+$username = "root"; // Replace with your database username
+$password = ""; // Replace with your database password
+$dbname = "american_residence"; // Replace with your database name
 // Establish the database connection
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -169,25 +169,56 @@ if (isset($_GET['id'])) {
         </div>
         <div class="row g-5">
             <!-- <div class="col-lg-6 col-sm-6 wow fadeInUp" data-wow-delay="0.1s"> -->
-                <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="property-item rounded overflow-hidden">
-                        <div class="position-relative overflow-hidden">
-                            <a href=""><img class="img-fluid" src="data:image/jpeg;base64,<?= $data['image']?>" alt=""></a>
-                            <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3"><?= $data['transaction_type']?></div>
-                            <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3"><?= $data['prop_type']?></div>
+                
+                <a href="cart.php?id=<?= $data['id']?>"><div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="property-item rounded overflow-hidden">
+                    <!-- Carousel Section -->
+                    <div id="carousel-<?= $data['id']?>" class="carousel slide position-relative" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <!-- ${propImages.map((image, index) => `
+                                <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                                    <img class="d-block w-100 img-fluid" src="data:image/jpeg;base64,${image}" alt="${property.name}">
+                                </div>
+                            `).join('')} -->
+                            <?php
+                                $imgs = explode(",",$data['image']);
+                                foreach($imgs as $index => $img):
+                                    $activeClass = ($index === 0) ? 'active' : '';
+                            ?>
+                            <div class="carousel-item <?=$activeClass?>">
+                                <img class="d-block w-100 img-fluid" src="data:image/jpeg;base64,<?= $img?>" alt="<?= htmlspecialchars($data['name'])?>">
+                            </div>
+                            <?php
+                                endforeach;
+                            ?>
                         </div>
-                        <div class="p-4 pb-0">
-                            <h5 class="text-primary mb-3"><?= $data['asking_price']?></h5>
-                            <a class="d-block h5 mb-2" href=""><?= $data['name']?></a>
-                            <p><i class="fa fa-map-marker-alt text-primary me-2"></i><?= $data['prop_location']?></p>
-                        </div>
-                        <div class="d-flex border-top">
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i><?= $data['asking_price']." Sqft"?></small>
-                            <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i><?= $data['asking_price']." Bed"?></small>
-                            <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i><?= $data['asking_price']." Bath"?></small>
-                        </div>
+                        <!-- Carousel Controls -->
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-<?= $data['id']?>" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel-<?= $data['id']?>" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <!-- Transaction Type and Property Type Tags -->
+                        <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For <?=$data['transaction_type']?></div>
+                        <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3"><?=$data['prop_type']?></div>
+                    </div>
+                    <!-- Property Details -->
+                    <div class="p-4 pb-0">
+                        <h5 class="text-primary mb-3">$<?=$data['asking_price']?></h5>
+                        <a class="d-block h5 mb-2" href="#"><?=$data['name']?></a>
+                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i><?=$data['prop_location']?></p>
+                    </div>
+                    <!-- Additional Info -->
+                    <div class="d-flex border-top">
+                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i><?= $data['space']?> sqft</small>
+                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i><?= $data['bedroom']?> Bed</small>
+                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i><?= $data['bathroom']?> Bath</small>
                     </div>
                 </div>
+            </div></a>
                 <div class="col-lg-6 col-md-6 wow fadeInUp">
                     <!-- <div class="col-md-6"> -->
                         
