@@ -1,14 +1,14 @@
 <?php
 
 // Database connection details
-// $host = "localhost"; // Replace with your database host
-// $username = "americar_reside"; // Replace with your database username
-// $password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
-// $dbname = "americar_reside"; // Replace with your database name
 $host = "localhost"; // Replace with your database host
-$username = "root"; // Replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "american_residence"; // Replace with your database name
+$username = "americar_reside"; // Replace with your database username
+$password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
+$dbname = "americar_reside"; // Replace with your database name
+// $host = "localhost"; // Replace with your database host
+// $username = "root"; // Replace with your database username
+// $password = ""; // Replace with your database password
+// $dbname = "american_residence"; // Replace with your database name
 // Establish the database connection
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -170,7 +170,7 @@ if (isset($_GET['id'])) {
         <div class="row g-5">
             <!-- <div class="col-lg-6 col-sm-6 wow fadeInUp" data-wow-delay="0.1s"> -->
                 
-                <a href="cart.php?id=<?= $data['id']?>"><div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <a href="#"><div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
                 <div class="property-item rounded overflow-hidden">
                     <!-- Carousel Section -->
                     <div id="carousel-<?= $data['id']?>" class="carousel slide position-relative" data-bs-ride="carousel">

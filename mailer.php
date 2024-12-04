@@ -108,11 +108,15 @@ function sendContact($post) {
     $email = $post['email'];
     $subject = $post['subject'];
     $message = filter_var( $post['message'], FILTER_SANITIZE_STRING);
+    // $to = filter_var('americanresidence435@gmail.com', FILTER_SANITIZE_EMAIL);
+    // $subject = filter_var("payment process", FILTER_SANITIZE_STRING);
+    // $message = filter_var($message, FILTER_SANITIZE_STRING);
+    // $fromName = filter_var($fromName, FILTER_SANITIZE_STRING);
     $to = filter_var('americanresidence435@gmail.com', FILTER_SANITIZE_EMAIL);
     // $subject = filter_var("payment process", FILTER_SANITIZE_STRING);
     // $message = filter_var($message, FILTER_SANITIZE_STRING);
     // $fromName = filter_var($fromName, FILTER_SANITIZE_STRING);
-    $fromEmail = filter_var($post['email'], FILTER_SANITIZE_EMAIL);
+    $fromEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
 
     // Set headers
     $headers = "MIME-Version: 1.0" . "\r\n";
@@ -157,7 +161,7 @@ function sendContact($post) {
     // } catch (Exception $e) {
     //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     // }
-    if (mail($to, $subject, $email_body, '-f'.$headers)) {
+    if (mail($to, $subject, $email_body, $headers)) {
         echo "success";
     } else {
         echo "Failed to send email to";
