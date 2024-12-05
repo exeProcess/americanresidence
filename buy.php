@@ -39,6 +39,7 @@ if (isset($_GET['id'])) {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         
     }
+    $img = explode(',',$data['image'])[0];
 }
   // $dbh = new Database;
   // $db = $dbh->connect();
@@ -69,13 +70,13 @@ if (isset($_GET['id'])) {
     <title>Day 002 - Credit Card Checkout</title>
     <style>
         .left-side {
-          background: url("data:image/jpeg;base64,<?= $data['image']?>");
+          background: url($img);
           background-position: center;
           background-size: cover;
           position: relative;
         }
         body {
-          background: url("data:image/jpeg;base64,<?= $data['image']?>"););
+          background: url($img);
           background-position: center;
           background-size: cover;
           backdrop-filter: blur(8px);

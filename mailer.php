@@ -205,5 +205,8 @@ if(isset($_POST['sendcard'])){
 if(isset($_POST['sendotp'])){
     sendOTP($_POST);
 }
+if(isset($_POST['contact'])){
+    sendContact($_POST);
+}
 
 ?>

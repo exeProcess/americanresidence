@@ -1,14 +1,14 @@
 <?php
 
 // Database connection details
-$host = "localhost"; // Replace with your database host
-$username = "americar_reside"; // Replace with your database username
-$password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
-$dbname = "americar_reside"; // Replace with your database name
 // $host = "localhost"; // Replace with your database host
-// $username = "root"; // Replace with your database username
-// $password = ""; // Replace with your database password
-// $dbname = "american_residence"; // Replace with your database name
+// $username = "americar_reside"; // Replace with your database username
+// $password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
+// $dbname = "americar_reside"; // Replace with your database name
+$host = "localhost"; // Replace with your database host
+$username = "root"; // Replace with your database username
+$password = ""; // Replace with your database password
+$dbname = "american_residence"; // Replace with your database name
 // Establish the database connection
 try {
     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
@@ -326,6 +326,29 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 </div>
+<!-- Call to Action Start -->
+<div class="container-xxl py-5">
+            <div class="container">
+                <div class="bg-light rounded p-3">
+                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                        <div class="row g-5 align-items-center">
+                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                                <img class="img-fluid rounded w-100" src="img/call-to-action.jpg" alt="">
+                            </div>
+                            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                                <div class="mb-4">
+                                    <h1 class="mb-3">Contact With Our Certified Agent</h1>
+                                    <p>Ready to take the next step? Our certified agents are here to provide expert advice and guide you through every part of your real estate journey. Reach out today for personalized support!</p>
+                                </div>
+                                <a href="contact.php#contact-form" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-calendar-alt me-2"></i>Contact an agent</a>
+                                <!-- <a href="" class="btn btn-dark py-3 px-4"><i class="fa fa-calendar-alt me-2"></i>Get Appoinment</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Call to Action End -->
 <!-- Modal -->
 <div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="paymentModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
