@@ -156,7 +156,7 @@
             <div class="container">
                 <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                     <h1 class="mb-3">Contact Us</h1>
-                    <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+                    <p></p>
                 </div>
                 <div class="row g-4">
                     <div class="col-12">
@@ -167,7 +167,7 @@
                                         <div class="icon me-3" style="width: 45px; height: 45px;">
                                             <i class="fa fa-map-marker-alt text-primary"></i>
                                         </div>
-                                        <span>123 Street, New York, USA</span>
+                                        <span>307 Sand Ln, Staten Island, NY</span>
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                                         <div class="icon me-3" style="width: 45px; height: 45px;">
                                             <i class="fa fa-envelope-open text-primary"></i>
                                         </div>
-                                        <span>info@example.com</span>
+                                        <span>americar@americareside.com</span>
                                     </div>
                                 </div>
                             </div>
@@ -187,7 +187,7 @@
                                         <div class="icon me-3" style="width: 45px; height: 45px;">
                                             <i class="fa fa-phone-alt text-primary"></i>
                                         </div>
-                                        <span>+012 345 6789</span>
+                                        <span>+1 (786) 307 1343</span>
                                     </div>
                                 </div>
                             </div>
@@ -254,7 +254,7 @@
                 <div class="row g-5">
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Get In Touch</h5>
-                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>307 Sand Ln, Staten Island, NY 10305, United States</p>
+                        <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>307 Sand Ln, Staten Island, NY.</p>
                         <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+1 (786) 307 1343</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>americar@americareside.com</p>
                         <div class="d-flex pt-2">
