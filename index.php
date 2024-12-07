@@ -959,7 +959,8 @@
             // const imageSrc = `data:image/jpeg;base64,${property.image}`;
             let propImages = property.image.split(",");
             const propertyHTML = `
-            <a href="cart.php?id=${property.id}"><div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+            <a href="cart.php?id=${property.id}">
                 <div class="property-item rounded overflow-hidden">
                     <!-- Carousel Section -->
                     <div id="carousel-${property.id}" class="carousel slide position-relative" data-bs-ride="carousel">
@@ -996,7 +997,8 @@
                         <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>${property.bathroom} Bath</small>
                     </div>
                 </div>
-            </div></a>
+                </a>
+            </div>
 
             `;
             $listings.append(propertyHTML);
