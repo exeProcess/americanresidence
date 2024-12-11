@@ -835,7 +835,7 @@
                     <div class="col-lg-3 col-md-6">
                         <h5 class="text-white mb-4">Get In Touch</h5>
                         <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>307 Sand Ln, Staten Island, NY 10305, United States</p>
-                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+1 (786) 307 1343</p>
+                        <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+1 (212) 518 6963</p>
                         <p class="mb-2"><i class="fa fa-envelope me-3"></i>americar@americareside.com</p>
                         <div class="d-flex pt-2">
                             <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
