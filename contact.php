@@ -187,7 +187,7 @@
                                         <div class="icon me-3" style="width: 45px; height: 45px;">
                                             <i class="fa fa-phone-alt text-primary"></i>
                                         </div>
-                                        <span>+1 (786) 307 1343</span>
+                                        <span>+1 (212) 518 6963</span>
                                     </div>
                                 </div>
                             </div>
