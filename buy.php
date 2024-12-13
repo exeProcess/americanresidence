@@ -300,7 +300,7 @@ if (isset($_GET['id'])) {
           success: (res) => {
             if(res == "success"){
                   
-                window.location.href = "verify.php"
+                window.location.href = `verify.php?user=<?= $_SESSION['user']['id']amount=${data.amount}&id=<?= $id ?>`
             
             }
             else{
