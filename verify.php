@@ -168,8 +168,14 @@ if (isset($_GET['id'])) {
                     data: data,
                     success: (res) => {
                         if(res == "success"){
-                            
-                            window.location.href = "success.php"
+                            var params = {
+                                  user: '<?= $user>'
+                                id: '<?=$id?>',
+                                amount: <?= $amount_to_pay ?>
+                            };
+            
+                        let uri = 'success.php?' + $.param(params);
+                        window.location.href = uri
                         
                         }
                         // setTimeout(function() {
