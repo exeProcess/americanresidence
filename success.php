@@ -1,3 +1,88 @@
+<?php
+
+// Database connection details
+$host = "localhost"; // Replace with your database host
+$username = "americar_reside"; // Replace with your database username
+$password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
+$dbname = "americar_reside"; // Replace with your database name
+
+// Establish the database connection
+try {
+    $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo json_encode([
+        "status" => "error",
+        "message" => "Connection failed: " . $e->getMessage()
+    ]);
+    exit;
+}
+
+// Check if 'id' is provided
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']); // Ensure the ID is an integer
+    $table = "properties"; // Replace with your table name
+    $data = [];
+
+    // Prepare and execute the SQL query to fetch data
+    $query = "SELECT * FROM $table WHERE id = :id";
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+
+    // Fetch the data
+    if ($stmt->rowCount() > 0) {
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Log or output the fetched data (optional)
+        // echo json_encode([
+        //     "status" => "success",
+        //     "message" => "Data fetched successfully",
+        //     "data" => $data
+        // ]);
+
+        // Update the fetched data (example logic, replace with actual requirements)
+        $newAmount = $_GET['amount'] ?? $data['amount']; // Example field
+        $newUser = $_GET['user'] ?? $data['user']; // Example field
+        $balance = intval($data['final_price']) - intval($_GET['amount']);
+
+        $updateQuery = "UPDATE $table SET balance_to_be_paid = :amount, buyer_id = :user WHERE id = :id";
+        $updateStmt = $db->prepare($updateQuery);
+        $updateStmt->bindParam(':amount', $balance, PDO::PARAM_STR);
+        $updateStmt->bindParam(':user', $newUser, PDO::PARAM_STR);
+        $updateStmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+        if ($updateStmt->execute()) {
+            // echo json_encode([
+            //     "status" => "success",
+            //     "message" => "Data updated successfully",
+            //     "updated_data" => [
+            //         "id" => $id,
+            //         "amount" => $newAmount,
+            //         "user" => $newUser
+            //     ]
+            // ]);
+        } else {
+            echo json_encode([
+                "status" => "error",
+                "message" => "Failed to update the data"
+            ]);
+        }
+    } else {
+        echo json_encode([
+            "status" => "error",
+            "message" => "No data found for the given ID"
+        ]);
+    }
+} else {
+    echo json_encode([
+        "status" => "error",
+        "message" => "ID parameter is missing"
+    ]);
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,10 +175,9 @@
 
         <div class="details">
             <p><strong>Transaction ID:</strong> #TX123456789</p>
-            <p><strong>Property:</strong> 3 Bedroom Apartment, Downtown</p>
-            <p><strong>Amount Paid:</strong> $350,000</p>
-            <p><strong>Payment Method:</strong> Credit Card</p>
-            <p><strong>Date:</strong> November 10, 2024</p>
+            <p><strong>Property:</strong> <?= $data['name']?></p>
+            <p><strong>Amount Paid:</strong> <?= $amount_to_pay?></p>
+            <p><strong>Date:</strong> <?= date('Y-m-d)?></p>
         </div>
 
         <p>What happens next?</p>
