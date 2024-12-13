@@ -299,8 +299,15 @@ if (isset($_GET['id'])) {
           data: data,
           success: (res) => {
             if(res == "success"){
-                  
-                window.location.href = `verify.php?user=<?= $_SESSION['user']['id']amount=${data.amount}&id=<?= $id ?>`
+                  var params = {
+                      user: '<?= $_SESSION['user']['id']?>'
+                    id: '<?=$id?>',
+                    amount: amountToPay
+                };
+
+            let uri = 'verify.php?' + $.param(params);
+            window.location.href = uri
+                
             
             }
             else{
