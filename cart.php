@@ -25,7 +25,7 @@ try {
 // Check if 'id' is provided
 if (isset($_GET['id'])) {
  if(isset($_SESSION['user']){
-    $userId = $_GET['user'];
+    $userId = $_SESSION['user']['id'];
     $id = intval($_GET['id']); // Ensure the ID is an integer
     $table = "properties"; // Replace with your table name
     $userTable = 'users';
@@ -35,7 +35,7 @@ if (isset($_GET['id'])) {
     $query = "SELECT * FROM $table WHERE id = :id";
     $stmt = $db->prepare($query);
     $stmt1 = $db->prepare($query1);
-    $stmt1->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt1->bindParam(':id', $userId, PDO::PARAM_INT);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 
