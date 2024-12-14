@@ -257,12 +257,12 @@ include_once "Database.php";
         }
 
        
-        public function select_this($id, $table)
+        public function select_this($id)
         {
             $query = "SELECT 
                     * 
                 FROM 
-                    $table 
+                    properties
                 WHERE 
                     id=:id";
             $prep_stmt = $this->connection->prepare($query);
