@@ -44,8 +44,12 @@ if (isset($_GET['id'])) {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         
     }
+    if ($stmt1->rowCount() > 0) {
+        $data = $stmt1->fetch(PDO::FETCH_ASSOC);
+        
+    }
  }else{
-    header('Location: login.php?returnPage=cart');
+    header('Location: admin/pages/form/login.php?returnPage=cart');
  }
 }
 ?>
@@ -542,7 +546,7 @@ icons.forEach(icon => {
         }
         if($("#userId).val() == ""){
           var params = {
-                returnPage: "cart
+                returnPage: "cart"
             };
 
             let uri = 'admin/pages/form/login.php?' + $.param(params);
