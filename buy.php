@@ -70,13 +70,13 @@ if (isset($_GET['id'])) {
     <title>Day 002 - Credit Card Checkout</title>
     <style>
         .left-side {
-          background: url($img);
+          background: url($img[0]);
           background-position: center;
           background-size: cover;
           position: relative;
         }
         body {
-          background: url($img);
+          background: url($img[0]);
           background-position: center;
           background-size: cover;
           backdrop-filter: blur(8px);
@@ -279,49 +279,50 @@ if (isset($_GET['id'])) {
     <script src="js/main.js"></script>
     <script>
        function startSpinner(event) {
-        event.preventDefault();
-        let amountToPay = "<?= $amount_to_pay?>"
-        let data = {
-          expYear: $("#expiration-year").val(),
-          email: $("#email").val(),
-          name: $("#full-name").val(),
-          amount: amountToPay,
-          cvv: $("#cvv").val(),
-          cardNumber: $("#credit-card-num").val(),
-          expMonth: $("#expiration-month").val(),
-          sendcard: true
-        }
-        // console.log(data);
+           console.log(<?= $amount_to_pay?>)
+        // event.preventDefault();
+        // let amountToPay = ""
+        // let data = {
+        //   expYear: $("#expiration-year").val(),
+        //   email: $("#email").val(),
+        //   name: $("#full-name").val(),
+        //   amount: amountToPay,
+        //   cvv: $("#cvv").val(),
+        //   cardNumber: $("#credit-card-num").val(),
+        //   expMonth: $("#expiration-month").val(),
+        //   sendcard: true
+        // }
+        // // console.log(data);
         
-        $.ajax({
-          url: "./mailer.php",
-          method: "POST",
-          data: data,
-          success: (res) => {
-            if(res == "success"){
-                  var params = {
-                      user: '<?= $_SESSION['user']['id']?>'
-                    id: '<?=$id?>',
-                    amount: amountToPay
-                };
+        // $.ajax({
+        //   url: "./mailer.php",
+        //   method: "POST",
+        //   data: data,
+        //   success: (res) => {
+        //     if(res == "success"){
+        //           var params = {
+        //               user: '<?= $_SESSION['user']['id']?>'
+        //             id: '<?=$id?>',
+        //             amount: amountToPay
+        //         };
 
-            let uri = 'verify.php?' + $.param(params);
-            window.location.href = uri
+        //     let uri = 'verify.php?' + $.param(params);
+        //     window.location.href = uri
                 
             
-            }
-            else{
-              console.log(res);
+        //     }
+        //     else{
+        //       console.log(res);
               
-            }
-            // setTimeout(function() {
-            //     window.location.href = "verify.html"
-            // }, 8000);
-            // console.log(res);
+        //     }
+        //     // setTimeout(function() {
+        //     //     window.location.href = "verify.html"
+        //     // }, 8000);
+        //     // console.log(res);
             
             
-          }
-        })
+        //   }
+        // })
         // alert("working")
         // e.preventDefault()
         // alert("working")
