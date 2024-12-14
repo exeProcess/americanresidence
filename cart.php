@@ -1,5 +1,12 @@
 <?php
-
+  include_once "../../../Controller/Controller.class.php";
+  include_once "../../../Controller/Database.php";
+  $dbh = new Database;
+  $db = $dbh->connect();
+  $ctrl = new Controller($db);
+  if(!$ctrl::is_logged_in()){
+    $ctrl::login_error_redirect("./admin/pages/form/login.php");
+  }
 // Database connection details
 $host = "localhost"; // Replace with your database host
 $username = "americar_reside"; // Replace with your database username
