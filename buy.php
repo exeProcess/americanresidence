@@ -1,5 +1,5 @@
 <?php
-
+include_once "Controller/Controller.class.php";
 // Database connection details
 $host = "localhost"; // Replace with your database host
 $username = "americar_reside"; // Replace with your database username
