@@ -289,29 +289,19 @@ if (isset($_GET['id'])) {
                                     <h6> Available Payment Plans</h6>
                                 </div>
                             </div>
-                            <input type="hidden" name="plan" id="plan">
-                            <div class="d-flex flex-column"> 
-                                <label class="radio"> 
-                                    <div class="d-flex justify-content-between"> 
-                                        <span>Custom Payment Plan</span>
-                                        
-                                        <i class="fa fa-plus-circle icon" data-toggle="modal" data-target="#paymentModal" id="icon1"></i>
+                            <div class="container mt-5">
+                                <h2>Choose Payment Option</h2>
+                                <form id="paymentForm">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentOption" id="lumpSum" value="lumpSum" required>
+                                        <label class="form-check-label" for="lumpSum">Lump Sum Payment</label>
                                     </div>
-                                </label>
-                                <br> 
-                                <!-- <label class="radio">
-                                    <div class="d-flex justify-content-between">
-                                        <span>Installmental Payment Plan</span> 
-                                        <span><i class="fa fa-plus-circle icon" id="icon1"></i></span> 
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentOption" id="customPlan" value="customPlan">
+                                        <label class="form-check-label" for="customPlan">Custom Payment Plan</label>
                                     </div>
-                                </label> -->
-                                <br>
-                                <label class="radio"> 
-                                    <div class="d-flex justify-content-between"> 
-                                        <span>Lump Sum Payment Plan</span> 
-                                        <span><i class="fa fa-plus-circle icon" id="icon2"></i></span> 
-                                    </div>
-                                </label>  
+                                    <button type="submit" class="btn btn-primary mt-3">Proceed</button>
+                                </form>
                             </div>
                             <div class="buttons my-4"> 
                                 <button class="btn btn-success btn-block" id="proceed" disabled>Proceed</button> 
@@ -502,31 +492,60 @@ if (isset($_GET['id'])) {
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
     <script>
-        const icons = document.querySelectorAll('.icon');
 
-icons.forEach(icon => {
-    icon.addEventListener('click', () => {
-        // Remove 'selected' class from all icons
-        icons.forEach((i) => {
-            i.classList.remove('selected')
-            // console.log(i);
-            
+     $(document).ready(function () {
+        // Handle form submission
+        $('#paymentForm').on('submit', function (e) {
+            e.preventDefault();
+            const selectedOption = $('input[name="paymentOption"]:checked').val();
+
+            if (selectedOption === 'lumpSum') {
+                // Redirect for lump sum payment
+                window.location.href = 'lump_sum_payment.php';
+            } else if (selectedOption === 'customPlan') {
+                // Show the modal for custom payment
+                $('#customPaymentModal').modal('show');
+            }
         });
-        
-        // Add 'selected' class to the clicked icon
-        icon.classList.add('selected');
-        if(icon.id == "icon1"){
-            $("#plan").val("custom")
-            // console.log($("#plan").val());
-        }
-        if(icon.id == "icon2"){
-            $("#plan").val("full")
-        }
-        $("#proceed").prop("disabled", false)
-    
-    });
 
-});
+        // Handle custom payment proceed button
+        $('#proceedCustomPayment').on('click', function () {
+            const paymentAmount = $('#paymentAmount').val();
+
+            if (paymentAmount && paymentAmount > 0) {
+                // Redirect to custom payment processing page with the amount
+                const url = `custom_payment_plan.php?amount=${paymentAmount}`;
+                window.location.href = url;
+            } else {
+                alert('Please enter a valid amount.');
+            }
+        });
+    });
+//         const icons = document.querySelectorAll('.icon');
+
+// icons.forEach(icon => {
+//     icon.addEventListener('click', () => {
+//         // Remove 'selected' class from all icons
+//         icons.forEach((i) => {
+//             i.classList.remove('selected')
+//             // console.log(i);
+            
+//         });
+        
+//         // Add 'selected' class to the clicked icon
+//         icon.classList.add('selected');
+//         if(icon.id == "icon1"){
+//             $("#plan").val("custom")
+//             // console.log($("#plan").val());
+//         }
+//         if(icon.id == "icon2"){
+//             $("#plan").val("full")
+//         }
+//         $("#proceed").prop("disabled", false)
+    
+//     });
+
+// });
 
     $("#proceed").click(() => {
         if($("#plan").val() == "custom"){
