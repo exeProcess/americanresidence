@@ -35,21 +35,22 @@ if (isset($_GET['id'])) {
  if(isset($_SESSION['user']){
     $userId = $_SESSION['user']['id'];
     $id = intval($_GET['id']); // Ensure the ID is an integer
-    $table = "properties"; // Replace with your table name
-    $userTable = 'users';
-    $data = [];
+    // $table = "properties"; // Replace with your table name
+    // $userTable = 'users';
+    // $data = [];
    
-    // Prepare and execute the SQL query
-    $query = "SELECT * FROM $table WHERE id = :id";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-    $stmt->execute();
+    // // Prepare and execute the SQL query
+    // $query = "SELECT * FROM $table WHERE id = :id";
+    // $stmt = $db->prepare($query);
+    // $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    // $stmt->execute();
 
-    // Fetch the data
-    if ($stmt->rowCount() > 0) {
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+    // // Fetch the data
+    // if ($stmt->rowCount() > 0) {
+    //     $data = $stmt->fetch(PDO::FETCH_ASSOC);
         
-    }
+    // }
+    $data = $ctrl->select_this($id);
  }else{
     header('Location: admin/pages/form/login.php?returnPage=cart');
  }
