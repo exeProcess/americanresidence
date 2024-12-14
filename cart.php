@@ -179,7 +179,6 @@ if (isset($_GET['id'])) {
 
 <!-- Category Start -->
 <div class="container-xxl py-5">
-  <input type='hidden' value='<?= $userId ?>' id="userId" >
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <h1 class="mb-3"></h1>
@@ -545,15 +544,15 @@ icons.forEach(icon => {
     $("#proceed").click(() => {
         if($("#plan").val() == "custom"){
             window.location.href = "checkout.php?id=<?=$id?>"
-        }
-        if($("#userId).val() == ""){
-          var params = {
-                returnPage: "cart"
-            };
+        // }
+        // if($("#userId).val() == ""){
+        //   var params = {
+        //         returnPage: "cart"
+        //     };
 
-            let uri = 'admin/pages/form/login.php?' + $.param(params);
-            window.location.href = uri
-        }
+        //     let uri = 'admin/pages/form/login.php?' + $.param(params);
+        //     window.location.href = uri
+        // }
         if($("#plan").val() == "full"){
             var params = {
                 id: '<?=$id?>',
