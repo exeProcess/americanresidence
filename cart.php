@@ -1,26 +1,34 @@
 <?php
- include_once "Controller/Controller.class.php";
-    include_once "Controller/Database.php";
+ // include_once "Controller/Controller.class.php";
+ //    include_once "Controller/Database.php";
 // Database connection details
-$host = "localhost"; // Replace with your database host
-$username = "americar_reside"; // Replace with your database username
-$password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
-$dbname = "americar_reside"; // Replace with your database name
+// $host = "localhost"; // Replace with your database host
+// $username = "americar_reside"; // Replace with your database username
+// $password = "LPcLYu2hVFAcWHU834gr"; // Replace with your database password
+// $dbname = "americar_reside"; // Replace with your database name
 // $host = "localhost"; // Replace with your database host
 // $username = "root"; // Replace with your database username
 // $password = ""; // Replace with your database password
 // $dbname = "american_residence"; // Replace with your database name
 // Establish the database connection
-try {
-    $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    echo json_encode([
-        "status" => "error",
-        "message" => "Connection failed: " . $e->getMessage()
-    ]);
-    exit;
-}
+// try {
+//     $db = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+//     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// } catch (PDOException $e) {
+//     echo json_encode([
+//         "status" => "error",
+//         "message" => "Connection failed: " . $e->getMessage()
+//     ]);
+//     exit;
+// }
+  include_once "./Controller/Controller.class.php";
+  include_once "./Controller/Database.php";
+  $dbh = new Database;
+  $db = $dbh->connect();
+  $ctrl = new Controller($db);
+  if(!$ctrl::is_logged_in()){
+    $ctrl::login_error_redirect("./admin/pages/form/login.php?return=cart");
+  }
 
 // Check if 'id' is provided
 if (isset($_GET['id'])) {
