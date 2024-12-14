@@ -953,13 +953,13 @@
             $listings.html('<p class="text-muted">No properties found.</p>');
             return;
         }
-
+        let user = "<?= ((isset($_SEESSION['user'])? $_SEESSION['user']['id']: '')?>";
         properties.forEach(property => {
             // Prepend the base64 prefix for a JPEG image
             // const imageSrc = `data:image/jpeg;base64,${property.image}`;
             let propImages = property.image.split(",");
             var params = {
-                user: "<?= ((isset($_SEESSION['user'])? $_SEESSION['user']['id']: '')?>",
+                user: user,
                 id: property.id
             };
 
