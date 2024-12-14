@@ -40,10 +40,6 @@ if (isset($_GET['id'])) {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         
     }
-    $data = $ctrl->select_this($id);
- }else{
-    header('Location: admin/pages/form/login.php?returnPage=cart');
- }
 }
 ?>
 
