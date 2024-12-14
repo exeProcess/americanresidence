@@ -958,9 +958,15 @@
             // Prepend the base64 prefix for a JPEG image
             // const imageSrc = `data:image/jpeg;base64,${property.image}`;
             let propImages = property.image.split(",");
+            var params = {
+                user: "<?= ((isset($_SEESSION['user'])? $_SEESSION['user']['id']: '')?>",
+                id: property.id
+            };
+
+            let uri = 'cart.php?' + $.param(params);
             const propertyHTML = `
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-            <a href="cart.php?id=${property.id}">
+            <a href="${uri}">
                 <div class="property-item rounded overflow-hidden">
                     <!-- Carousel Section -->
                     <div id="carousel-${property.id}" class="carousel slide position-relative" data-bs-ride="carousel">
