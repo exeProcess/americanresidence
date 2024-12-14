@@ -1,5 +1,6 @@
 <?php
- 
+ include_once "Controller/Controller.class.php";
+    include_once "Controller/Database.php";
 // Database connection details
 $host = "localhost"; // Replace with your database host
 $username = "americar_reside"; // Replace with your database username
@@ -23,6 +24,7 @@ try {
 
 // Check if 'id' is provided
 if (isset($_GET['id'])) {
+ if(isset($_SESSION['user']){
     $userId = $_GET['user'];
     $id = intval($_GET['id']); // Ensure the ID is an integer
     $table = "properties"; // Replace with your table name
@@ -42,10 +44,9 @@ if (isset($_GET['id'])) {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
         
     }
-  if ($stm1t->rowCount() > 0) {
-        $userData = $stmt1->fetch(PDO::FETCH_ASSOC);
-        
-    }
+ }else{
+    
+ }
 }
 ?>
 
