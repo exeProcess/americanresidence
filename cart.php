@@ -30,22 +30,16 @@ if (isset($_GET['id'])) {
     $table = "properties"; // Replace with your table name
     $userTable = 'users';
     $data = [];
-    $query1 = "SELECT * FROM $userTable WHERE id = :id";
+   
     // Prepare and execute the SQL query
     $query = "SELECT * FROM $table WHERE id = :id";
     $stmt = $db->prepare($query);
-    $stmt1 = $db->prepare($query1);
-    $stmt1->bindParam(':id', $userId, PDO::PARAM_INT);
     $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
 
     // Fetch the data
     if ($stmt->rowCount() > 0) {
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
-        
-    }
-    if ($stmt1->rowCount() > 0) {
-        $data = $stmt1->fetch(PDO::FETCH_ASSOC);
         
     }
  }else{
@@ -177,7 +171,7 @@ if (isset($_GET['id'])) {
 
 <!-- Category Start -->
 <div class="container-xxl py-5">
-  <input type='hidden' value='<?= $userData['id']?>' id="userId" >
+  <input type='hidden' value='<?= $userId ?>' id="userId" >
     <div class="container">
         <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <h1 class="mb-3"></h1>
