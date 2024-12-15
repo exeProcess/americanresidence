@@ -290,7 +290,6 @@ if (isset($_GET['id'])) {
                                 </div>
                             </div>
                             <div class="container mt-5">
-                                <h2>Choose Payment Option</h2>
                                 <form id="paymentForm">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="paymentOption" id="lumpSum" value="lumpSum" required>
@@ -300,12 +299,12 @@ if (isset($_GET['id'])) {
                                         <input class="form-check-input" type="radio" name="paymentOption" id="customPlan" value="customPlan">
                                         <label class="form-check-label" for="customPlan">Custom Payment Plan</label>
                                     </div>
-                                    <button type="submit" class="btn btn-primary mt-3">Proceed</button>
+                                    <button type="submit" class="btn btn-primary mt-3" id="proceed">Proceed</button>
                                 </form>
                             </div>
-                            <div class="buttons my-4"> 
+<!--                             <div class="buttons my-4"> 
                                 <button class="btn btn-success btn-block" id="proceed" disabled>Proceed</button> 
-                            </div>
+                            </div> -->
 
 
                             
